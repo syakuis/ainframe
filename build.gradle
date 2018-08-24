@@ -1,0 +1,66 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.14.RELEASE'
+    }
+
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'net.ltgt.gradle:gradle-apt-plugin:0.18'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'net.ltgt.apt'
+    apply plugin: 'org.springframework.boot'
+
+    // https://docs.gradle.org/current/dsl/org.gradle.plugins.ide.idea.model.IdeaModule.html
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = compileJava.destinationDir
+            testOutputDir = compileTestJava.destinationDir
+            jdkName = '1.7'
+        }
+    }
+
+    group 'org.ainframe'
+    version '1.0.0.BUILD-SNAPSHOT'
+
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
+    repositories {
+        maven {
+            url "http://repo1.maven.org/maven2/"
+        }
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        compile 'org.springframework.boot:spring-boot-starter-web'
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+        compile 'org.springframework.boot:spring-boot-devtools'
+
+        compile 'org.springframework.boot:spring-boot-starter-freemarker'
+
+        compile 'org.apache.commons:commons-lang3:3.7'
+
+        compileOnly 'org.projectlombok:lombok:1.18.2'
+        annotationProcessor 'org.projectlombok:lombok:1.18.2'
+        testCompileOnly 'org.projectlombok:lombok:1.18.2'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.2'
+
+        testCompile group: 'junit', name: 'junit', version: '4.12'
+    }
+}

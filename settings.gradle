@@ -1,0 +1,6 @@
+rootProject.name = 'ainframe'
+include 'ainframe-core'
+include 'ainframe-cache'
+include 'ainframe-web'
+include 'ainframe-web-module'
+
