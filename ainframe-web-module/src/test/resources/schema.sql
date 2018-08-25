@@ -1,0 +1,1 @@
+create sequence MODULE_IDX_SEQ;
