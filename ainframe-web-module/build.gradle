@@ -1,4 +1,6 @@
 dependencies {
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    runtime 'com.h2database:h2'
+    compile project(':ainframe-core')
+    compile project(':ainframe-data-jpa')
+    testCompile 'oracle:ojdbc6:11.1.0.7.0'
+    testCompile 'com.h2database:h2'
 }

@@ -20,16 +20,18 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = "MODULE")
-@SequenceGenerator(
-    name = "MODULE_IDX_GEN",
-    sequenceName = "MODULE_IDX_SEQ",
-    allocationSize = 1
-)
 public class ModuleEntity {
 
     @Getter
     @Setter
-    @Id
+    @SequenceGenerator(
+        name = "MODULE_IDX_GEN",
+        sequenceName = "MODULE_IDX_SEQ",
+        allocationSize = 1
+    )
+    @GeneratedValue(
+        generator = "MODULE_IDX_GEN",
+        strategy = GenerationType.SEQUENCE)
     @GenericGenerator(
         name = "MODULE_IDX_GEN",
         strategy = "org.ainframe.web.module.domain.StringSequenceIdentifier",
@@ -40,19 +42,34 @@ public class ModuleEntity {
                 name = "sequence_prefix", value = "MODU"),
         }
     )
-    @GeneratedValue(
-        generator = "MODULE_IDX_GEN",
-        strategy = GenerationType.SEQUENCE)
+    @Id
     @Column(name = "MODULE_IDX", nullable = false, length = 20)
     private String moduleIdx;
+
     @Getter
     @Setter
     @Column(name = "MODULE_ID", nullable = false, unique = true)
     private String moduleId;
+
     @Getter
     @Setter
     @Column(name = "MODULE_NAME", nullable = false)
     private String moduleName;
+
+    @Getter
+    @Setter
+    @Column(name = "BROWSER_TITLE")
+    private String browserTitle;
+
+    @Getter
+    @Setter
+    @Column(name = "SKIN")
+    private String skin;
+
+    @Getter
+    @Setter
+    @Column(name = "LAYOUT_IDX")
+    private String layoutIdx;
 
     @Getter
     @Setter

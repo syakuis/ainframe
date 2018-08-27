@@ -15,9 +15,7 @@ import org.ainframe.web.module.repository.ModuleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -26,16 +24,10 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @since 2018. 8. 24.
  */
 @RunWith(SpringRunner.class)
-@EnableAutoConfiguration
 @SpringBootTest
-@DataJpaTest
+@EnableAutoConfiguration
 @Transactional
 public class ModuleRepositoryTest {
-    @SpringBootConfiguration
-    static class Config {
-
-    }
-
     @PersistenceContext
     private EntityManager entityManager;
 

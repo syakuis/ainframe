@@ -1,4 +1,4 @@
-package org.ainframe.web.module.domain;
+package org.ainframe.data.jpa;
 
 import java.io.Serializable;
 import java.util.Properties;
@@ -17,10 +17,6 @@ import org.hibernate.type.Type;
 
 import com.sun.corba.se.spi.ior.Identifiable;
 
-/**
- * @author Seok Kyun. Choi. 최석균 (Syaku)
- * @since 2018. 8. 24.
- */
 public class StringSequenceIdentifier
         implements IdentifierGenerator, Configurable {
 
