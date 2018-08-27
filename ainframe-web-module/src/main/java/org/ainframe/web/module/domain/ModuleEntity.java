@@ -1,5 +1,9 @@
 package org.ainframe.web.module.domain;
 
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -17,7 +21,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "MODULE")
 @SequenceGenerator(
-    name = "MODULE_IDX_SEQ",
+    name = "MODULE_IDX_GEN",
     sequenceName = "MODULE_IDX_SEQ",
     allocationSize = 1
 )
@@ -27,7 +31,7 @@ public class ModuleEntity {
     @Setter
     @Id
     @GenericGenerator(
-        name = "assigned-sequence",
+        name = "MODULE_IDX_GEN",
         strategy = "org.ainframe.web.module.domain.StringSequenceIdentifier",
         parameters = {
             @org.hibernate.annotations.Parameter(
@@ -37,7 +41,7 @@ public class ModuleEntity {
         }
     )
     @GeneratedValue(
-        generator = "assigned-sequence",
+        generator = "MODULE_IDX_GEN",
         strategy = GenerationType.SEQUENCE)
     @Column(name = "MODULE_IDX", nullable = false, length = 20)
     private String moduleIdx;
@@ -50,12 +54,34 @@ public class ModuleEntity {
     @Column(name = "MODULE_NAME", nullable = false)
     private String moduleName;
 
+    @Getter
+    @Setter
+    @Column(name = "REG_DATE", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    // todo 등록일 및 생성일 필드명 개선
+    private Date regDate;
+
+    @Getter
+    @Setter
+    @OneToMany(targetEntity = ModuleOptionEntity.class)
+    @JoinColumn(name = "MODULE_IDX")
+    private List<ModuleOptionEntity> moduleOptionEntities;
+
     public ModuleEntity() {
     }
 
     public ModuleEntity(String moduleId, String moduleName) {
         this.moduleId = moduleId;
         this.moduleName = moduleName;
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.regDate = new Date();
+    }
+
+    public static List<ModuleOptionEntity> createModuleOptionEntities(ModuleOptionEntity ...moduleOptionEntity) {
+        return Arrays.asList(moduleOptionEntity);
     }
 
     @Override
