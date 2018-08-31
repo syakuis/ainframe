@@ -1,0 +1,36 @@
+# AIN-FRAME (가칭)
+
+## package flow
+
+```
+|- spring-boot
+  |- ainframe-core
+    |- ainframe-cache
+    |- ainframe-data-jpa
+      |- ainframe-web-config
+      |- ainframe-web-module
+        |- ainframe-web
+          |- ainframe-module-*
+```
+
+## spring boot properties 전략
+
+**문제**
+
+- apllication.properties 는 같은 경로에 위치할때  중복으로 읽어지지 않는 다. 즉 각기 다른 jar 라이브러리에서 중복된 위치의 프로파일이라면 최종 하나만 읽어진다.
+- apllication.yml 은 @PropertySource 에서 사용할 수 없다.
+
+**분석**
+- @PropertySource 이용하여 직접 프로퍼티를 읽을 수 있다.
+- 아래의 3가지 로드순서에 의해 해결한다. 중복된 키는 아래가 위의 값을 덮어쓰기한다.
+  - PropertySource
+  - /application.properties
+  - /config/application.properties
+  - /application-{profile}.properties
+
+**해결**
+
+- yaml 확장자는 사용하지 않는 다.
+- 지역 설정은 각 jar 라이브러리 properties 는 PropertySource 선언으로 직접 불러온다. 프로퍼티 경로를 최상위와 ./config 혹은 /config 경로가 아니여야 한다.
+- 전역 설정(기본)은 /application.properties 에서 설정한다.
+- 테스트시 사용할 프로퍼티는 Profile 을 사용해야 한다.

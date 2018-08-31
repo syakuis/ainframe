@@ -1,5 +1,7 @@
 package org.ainframe.web.module.repository;
 
+import java.util.List;
+
 import org.ainframe.web.module.domain.ModuleEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +14,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ModuleRepository extends JpaRepository<ModuleEntity, String> {
-
+    List<ModuleEntity> findAll();
+    ModuleEntity findOneByModuleId(String moduleId);
+    ModuleEntity findOneByModuleIdx(String moduleIdx);
     Page<ModuleEntity> findByModuleId(String moduleId, Pageable pageable);
     Page<ModuleEntity> findByModuleName(String moduleName, Pageable pageable);
     Page<ModuleEntity> findByBrowserTitleStartingWith(String browserTitle, Pageable pageable);

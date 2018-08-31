@@ -1,29 +1,34 @@
 package org.ainframe.web.module.domain;
 
-import java.util.Arrays;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.ainframe.core.data.enums.YesOrNo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.google.common.collect.Lists;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
+ * todo 테이블 필드명 새롭게 정리하기.
+ * todo regDate 대신 정렬할 수 있는 필드로 변경한다.
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 8. 24.
  */
 @Entity
 @Table(name = "MODULE")
-public class ModuleEntity {
-
-    @Getter
-    @Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ModuleEntity implements Serializable {
     @SequenceGenerator(
         name = "MODULE_IDX_GEN",
         sequenceName = "MODULE_IDX_SEQ",
@@ -34,7 +39,7 @@ public class ModuleEntity {
         strategy = GenerationType.SEQUENCE)
     @GenericGenerator(
         name = "MODULE_IDX_GEN",
-        strategy = "org.ainframe.web.module.domain.StringSequenceIdentifier",
+        strategy = "org.ainframe.data.jpa.StringSequenceIdentifier",
         parameters = {
             @org.hibernate.annotations.Parameter(
                 name = "sequence_name", value = "MODULE_IDX_SEQ"),
@@ -46,51 +51,33 @@ public class ModuleEntity {
     @Column(name = "MODULE_IDX", nullable = false, length = 20)
     private String moduleIdx;
 
-    @Getter
-    @Setter
     @Column(name = "MODULE_ID", nullable = false, unique = true)
     private String moduleId;
 
-    @Getter
-    @Setter
     @Column(name = "MODULE_NAME", nullable = false)
     private String moduleName;
 
-    @Getter
-    @Setter
     @Column(name = "BROWSER_TITLE")
     private String browserTitle;
 
-    @Getter
-    @Setter
     @Column(name = "SKIN")
     private String skin;
 
-    @Getter
-    @Setter
     @Column(name = "LAYOUT_IDX")
     private String layoutIdx;
 
-    @Getter
-    @Setter
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "USE_THEME")
+    private YesOrNo onlyUseTheme;
+
     @Column(name = "REG_DATE", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     // todo 등록일 및 생성일 필드명 개선
     private Date regDate;
 
-    @Getter
-    @Setter
     @OneToMany(targetEntity = ModuleOptionEntity.class)
     @JoinColumn(name = "MODULE_IDX")
     private List<ModuleOptionEntity> moduleOptionEntities;
-
-    public ModuleEntity() {
-    }
-
-    public ModuleEntity(String moduleId, String moduleName) {
-        this.moduleId = moduleId;
-        this.moduleName = moduleName;
-    }
 
     @PrePersist
     public void prePersist() {
@@ -98,17 +85,7 @@ public class ModuleEntity {
     }
 
     public static List<ModuleOptionEntity> createModuleOptionEntities(ModuleOptionEntity ...moduleOptionEntity) {
-        return Arrays.asList(moduleOptionEntity);
-    }
-
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return EqualsBuilder.reflectionEquals(this, obj);
+        return Lists.newArrayList(moduleOptionEntity);
     }
 
     @Override

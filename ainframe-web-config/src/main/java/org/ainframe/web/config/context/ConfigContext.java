@@ -1,0 +1,28 @@
+package org.ainframe.web.config.context;
+
+import org.ainframe.web.config.model.Config;
+import org.ainframe.web.config.model.ConfigDetails;
+import org.ainframe.web.config.service.ConfigContextService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+/**
+ * ConfigContextService 를 이용하여 데이터를 공유한다.
+ * @author Seok Kyun. Choi. 최석균 (Syaku)
+ * @since 2018. 8. 31.
+ * @see ConfigContextService
+ * @see ConfigDetails
+ */
+@Component
+public class ConfigContext {
+    private ConfigContextService configContextService;
+
+    @Autowired
+    public void setConfigContextService(ConfigContextService configContextService) {
+        this.configContextService = configContextService;
+    }
+
+    public Config getConfig() {
+        return this.configContextService.getConfig();
+    }
+}

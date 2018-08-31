@@ -2,8 +2,6 @@ package org.ainframe.web.module.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.ainframe.web.module.domain.ModuleEntity;
 import org.ainframe.web.module.repository.ModuleRepository;
 import org.ainframe.web.module.service.model.ModuleSearch;
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 
@@ -19,7 +18,7 @@ import com.google.common.collect.Lists;
  * @since 2018. 8. 27.
  */
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class ViewModuleService {
     private ModuleRepository moduleRepository;
 

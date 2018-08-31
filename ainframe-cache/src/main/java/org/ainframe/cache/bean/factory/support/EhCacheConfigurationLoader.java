@@ -11,7 +11,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.ainframe.core.io.MultiplePathMatchingResourcePatternResolver;
+import org.ainframe.core.io.PathsMatchingResourceResolver;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -32,8 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EhCacheConfigurationLoader {
     private PathMatchingResourcePatternResolver pathMatching = new PathMatchingResourcePatternResolver();
-    private MultiplePathMatchingResourcePatternResolver multiplePathMatching
-            = new MultiplePathMatchingResourcePatternResolver();
+    private PathsMatchingResourceResolver pathsMatching
+            = new PathsMatchingResourceResolver();
 
     private final String ehcacheLocation;
     private final String[] cacheLocation;
@@ -62,7 +62,7 @@ public class EhCacheConfigurationLoader {
     private List<Node> getCacheXmlLoader() throws EhCacheConfigurationException {
         try {
             List<Node> result = new ArrayList<>();
-            Resource[] resources = multiplePathMatching.getResources(cacheLocation);
+            Resource[] resources = pathsMatching.getResources(cacheLocation);
 
             for (Resource resource : resources) {
                 if (resource.exists()) {

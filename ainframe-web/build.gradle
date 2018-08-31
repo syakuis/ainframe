@@ -1,4 +1,4 @@
 dependencies {
-    compile project(':ainframe-core')
+    compile project(':ainframe-web-config')
     compile project(':ainframe-web-module')
 }

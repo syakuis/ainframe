@@ -1,0 +1,1 @@
+create sequence CONFIG_IDX_SEQ;

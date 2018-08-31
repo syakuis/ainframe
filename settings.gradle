@@ -2,6 +2,6 @@ rootProject.name = 'ainframe'
 include 'ainframe-core'
 include 'ainframe-cache'
 include 'ainframe-data-jpa'
+include 'ainframe-web-config'
 include 'ainframe-web-module'
 include 'ainframe-web'
-

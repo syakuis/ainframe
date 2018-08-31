@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  * @see PathMatchingResourcePatternResolver
  */
 @Slf4j
-public class MultiplePathMatchingResourcePatternResolver implements ResourcePatternResolver {
+public class PathsMatchingResourceResolver implements ResourcePatternResolver {
   private final PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
   @Override
