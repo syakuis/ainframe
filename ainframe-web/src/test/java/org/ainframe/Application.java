@@ -1,11 +1,11 @@
-package org.ainframe.web.view;
+package org.ainframe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
- * @since 2018. 8. 28.
+ * @since 2018. 9. 6.
  */
 @SpringBootApplication
 public class Application {

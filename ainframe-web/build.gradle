@@ -1,4 +1,6 @@
 dependencies {
     compile project(':ainframe-web-config')
     compile project(':ainframe-web-module')
+
+    testCompile 'oracle:ojdbc6:11.1.0.7.0'
 }

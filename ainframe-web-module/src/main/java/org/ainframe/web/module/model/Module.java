@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.ainframe.web.module.domain.ModuleEntity;
 import org.ainframe.web.module.domain.ModuleOptionEntity;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -14,6 +15,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
@@ -22,6 +24,7 @@ import lombok.Getter;
  */
 @Builder
 @Getter
+@EqualsAndHashCode
 public class Module implements Serializable {
     private String moduleIdx;
     private String moduleId;
@@ -64,5 +67,10 @@ public class Module implements Serializable {
             .onlyUseTheme(moduleEntity.getOnlyUseTheme().isValue())
             .browserTitle(moduleEntity.getBrowserTitle())
             .moduleOptions(moduleOptions).build();
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
     }
 }

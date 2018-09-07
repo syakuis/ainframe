@@ -2,7 +2,10 @@ package org.ainframe.web.module.model;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 /**
@@ -10,11 +13,15 @@ import lombok.Getter;
  * @since 2018. 8. 29.
  */
 @Builder
+@Getter
+@EqualsAndHashCode
 public class ModuleOption implements Serializable {
-    @Getter
     private String name;
-    @Getter
     private String value;
-    @Getter
     private String title;
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }
