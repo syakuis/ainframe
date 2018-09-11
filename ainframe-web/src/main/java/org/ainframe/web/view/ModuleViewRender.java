@@ -1,10 +1,12 @@
 package org.ainframe.web.view;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.servlet.ServletContext;
 
+import org.ainframe.core.util.PathUtils;
 import org.ainframe.web.config.model.Config;
 import org.ainframe.web.module.model.Module;
 import org.apache.commons.lang3.StringUtils;
@@ -107,7 +109,7 @@ public class ModuleViewRender implements ModuleView {
      */
     public void changeSkin(String skin) {
         if (skin == null || skin.length() == 0) {
-            throw new IllegalArgumentException("skin 인자는 꼭 입력해야 한다.");
+            throw new IllegalArgumentException("skin 인자가 빈값이거나 널이다.");
         }
         this.skin = skin;
     }
@@ -118,16 +120,10 @@ public class ModuleViewRender implements ModuleView {
      * @return boolean
      */
     private boolean isResourceExists(String path) {
-        ServletRequestAttributes servlet = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        ServletContext servletContext = servlet.getRequest().getServletContext();
-        try {
-          URL url = servletContext.getResource(path);
-          return url != null;
-        } catch (MalformedURLException e) {
-          log.debug(e.getMessage());
+        if (path == null || path.length() == 0) {
+            throw new IllegalArgumentException("path 인자가 빈값이거나 널이다.");
         }
-
-        return false;
+        return new File(PathUtils.getRootClassPath() + path).exists();
     }
 
     /**

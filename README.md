@@ -7,10 +7,11 @@
   |- ainframe-core
     |- ainframe-cache
     |- ainframe-data-jpa
-      |- ainframe-web-config
-      |- ainframe-web-module
+      |- ainframe-config
+      |- ainframe-module
         |- ainframe-web
           |- ainframe-module-*
+            |- aflow
 ```
 
 ## spring boot properties 전략
@@ -34,3 +35,15 @@
 - 지역 설정은 각 jar 라이브러리 properties 는 PropertySource 선언으로 직접 불러온다. 프로퍼티 경로를 최상위와 ./config 혹은 /config 경로가 아니여야 한다.
 - 전역 설정(기본)은 /application.properties 에서 설정한다.
 - 테스트시 사용할 프로퍼티는 Profile 을 사용해야 한다.
+
+## spring boot component scan 전략
+
+**문제**
+
+- 멀티 프로젝트로 개발시 서로 다룬 둘이상의 패키지 경로를 스캔할 수 있어야 한다.
+- 설정 프로퍼티는 원활한 확장.
+
+**해결**
+
+- @SpringBootApplication 하위 패키지만 읽어들이기 때문에 메인 프로젝트를 제외한 의존 프로젝트는 직접 autoConfiguration 을 구현하여 작동하게 한다.
+- 설정 프로퍼티는 메인 프로젝트에 필요한 모든 설정을 추가해야 한다.

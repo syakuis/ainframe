@@ -5,6 +5,7 @@ import java.util.List;
 import org.ainframe.web.module.domain.ModuleEntity;
 import org.ainframe.web.module.repository.ModuleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class ModuleService {
     private ModuleRepository moduleRepository;
 
     @Autowired
+    @Qualifier("moduleRepository")
     public void setModuleRepository(ModuleRepository moduleRepository) {
         this.moduleRepository = moduleRepository;
     }
