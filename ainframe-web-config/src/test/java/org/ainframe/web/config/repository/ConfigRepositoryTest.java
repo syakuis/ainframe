@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.ainframe.web.config.config.ConfigProperties;
 import org.ainframe.web.config.domain.ConfigEntity;
-import org.ainframe.web.config.repository.ConfigRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,11 +7,13 @@
   |- ainframe-core
     |- ainframe-cache
     |- ainframe-data-jpa
-      |- ainframe-config
-      |- ainframe-module
-        |- ainframe-web
-          |- ainframe-module-*
-            |- aflow
+    |- ainframe-context
+      |- ainframe-web-config
+      |- ainframe-web-module
+      |- ainframe-web-menu
+      |- ainframe-web-layout
+        |- ainframe-web -> boot.starter 변경
+          |- aflow
 ```
 
 ## spring boot properties 전략

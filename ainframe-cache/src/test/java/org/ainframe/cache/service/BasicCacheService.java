@@ -1,4 +1,4 @@
-package org.ainframe.cache;
+package org.ainframe.cache.service;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,7 +12,7 @@ import java.util.Date;
  * @since 16. 7. 27.
  */
 @Service
-public class BasicCacheServiceTest {
+public class BasicCacheService {
 
     @Cacheable("test")
     public long getDate() {

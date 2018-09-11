@@ -1,6 +1,5 @@
 package org.ainframe.web.autoconfigure;
 
-import org.ainframe.web.Banner;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,5 +14,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("org.ainframe")
 @EnableJpaRepositories("org.ainframe")
 public class AinframeAutoConfiguration {
-    public static final Banner BANNER = new Banner();
 }

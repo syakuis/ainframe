@@ -1,6 +1,7 @@
 package org.ainframe.web.config.model;
 
 import org.ainframe.core.data.enums.YesOrNo;
+import org.ainframe.context.model.Config;
 
 import lombok.Data;
 import lombok.ToString;

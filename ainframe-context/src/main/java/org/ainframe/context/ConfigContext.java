@@ -1,8 +1,6 @@
-package org.ainframe.web.config.context;
+package org.ainframe.context;
 
-import org.ainframe.web.config.model.Config;
-import org.ainframe.web.config.model.ConfigDetails;
-import org.ainframe.web.config.service.ConfigContextService;
+import org.ainframe.context.model.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 8. 31.
  * @see ConfigContextService
- * @see ConfigDetails
+ * @see Config
  */
 @Component
 public class ConfigContext {

@@ -1,4 +1,4 @@
-package org.ainframe.web;
+package org.ainframe.web.banner;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -2,9 +2,10 @@ package org.ainframe.web.config.service;
 
 import static org.junit.Assert.*;
 
-import org.ainframe.web.config.context.ConfigContext;
 import org.ainframe.web.config.domain.ConfigObject;
-import org.ainframe.web.config.model.Config;
+import org.ainframe.context.ConfigContext;
+import org.ainframe.context.ConfigContextService;
+import org.ainframe.context.model.Config;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

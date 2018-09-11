@@ -2,9 +2,9 @@ package org.ainframe.web.view;
 
 import java.util.Objects;
 
-import org.ainframe.web.config.context.ConfigContext;
-import org.ainframe.web.module.context.ModuleContext;
-import org.ainframe.web.module.model.Module;
+import org.ainframe.context.ConfigContext;
+import org.ainframe.context.ModuleContext;
+import org.ainframe.context.model.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

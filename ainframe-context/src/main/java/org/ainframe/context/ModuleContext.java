@@ -1,9 +1,8 @@
-package org.ainframe.web.module.context;
+package org.ainframe.context;
 
 import java.util.List;
 
-import org.ainframe.web.module.model.Module;
-import org.ainframe.web.module.service.ModuleContextService;
+import org.ainframe.context.model.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

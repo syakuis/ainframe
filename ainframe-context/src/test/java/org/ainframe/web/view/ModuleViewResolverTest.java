@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Objects;
 
-import org.ainframe.web.config.context.ConfigContext;
-import org.ainframe.web.config.model.Config;
-import org.ainframe.web.module.context.ModuleContext;
-import org.ainframe.web.module.model.Module;
+import org.ainframe.context.ConfigContext;
+import org.ainframe.context.model.Config;
+import org.ainframe.context.ModuleContext;
+import org.ainframe.context.model.Module;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

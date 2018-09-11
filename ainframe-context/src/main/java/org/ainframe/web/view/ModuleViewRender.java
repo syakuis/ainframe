@@ -1,17 +1,11 @@
 package org.ainframe.web.view;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.servlet.ServletContext;
 
 import org.ainframe.core.util.PathUtils;
-import org.ainframe.web.config.model.Config;
-import org.ainframe.web.module.model.Module;
+import org.ainframe.context.model.Config;
+import org.ainframe.context.model.Module;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import lombok.Getter;

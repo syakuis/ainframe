@@ -3,14 +3,19 @@ package org.ainframe.web.module.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.*;
 
 import org.ainframe.core.data.enums.YesOrNo;
+import org.ainframe.context.model.Module;
+import org.ainframe.context.model.ModuleOption;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -86,6 +91,41 @@ public class ModuleEntity implements Serializable {
 
     public static List<ModuleOptionEntity> createModuleOptionEntities(ModuleOptionEntity ...moduleOptionEntity) {
         return Lists.newArrayList(moduleOptionEntity);
+    }
+
+    /**
+     * {@link ModuleEntity} 를 Module 로 변경한다.
+     * @param moduleEntity {@link ModuleEntity}
+     * @return Module
+     */
+    public static Module transform(ModuleEntity moduleEntity) {
+        Map<String, ModuleOption> moduleOptions = Maps.transformValues(
+            Maps.uniqueIndex(
+                moduleEntity.getModuleOptionEntities(),
+                new Function<ModuleOptionEntity, String>() {
+                    @Override
+                    public String apply(ModuleOptionEntity input) {
+                        return input.getName();
+                    }
+                }),
+            new Function<ModuleOptionEntity, ModuleOption>() {
+                @Override
+                public ModuleOption apply(ModuleOptionEntity entity) {
+                    return ModuleOption.builder()
+                        .name(entity.getName())
+                        .value(entity.getValue())
+                        .title(entity.getTitle()).build();
+                }
+            });
+
+        return Module.builder()
+            .moduleIdx(moduleEntity.getModuleIdx())
+            .moduleId(moduleEntity.getModuleId())
+            .moduleName(moduleEntity.getModuleName())
+            .skin(moduleEntity.getSkin())
+            .onlyUseTheme(moduleEntity.getOnlyUseTheme().isValue())
+            .browserTitle(moduleEntity.getBrowserTitle())
+            .moduleOptions(moduleOptions).build();
     }
 
     @Override

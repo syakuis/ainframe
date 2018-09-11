@@ -1,6 +1,6 @@
 package org.ainframe.web.config.domain;
 
-import org.ainframe.web.config.model.Config;
+import org.ainframe.context.model.Config;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

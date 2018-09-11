@@ -1,6 +1,7 @@
-package org.ainframe.web.module.model;
+package org.ainframe.context.model;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -15,10 +16,14 @@ import lombok.Getter;
 @Builder
 @Getter
 @EqualsAndHashCode
-public class ModuleOption implements Serializable {
-    private String name;
-    private String value;
-    private String title;
+public class Module implements Serializable {
+    private String moduleIdx;
+    private String moduleId;
+    private String moduleName;
+    private String skin;
+    private boolean onlyUseTheme;
+    private String browserTitle;
+    private Map<String, ModuleOption> moduleOptions;
 
     @Override
     public String toString() {

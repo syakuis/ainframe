@@ -10,11 +10,9 @@ import lombok.Setter;
  * @since 2018. 8. 10.
  */
 @ConfigurationProperties(prefix = "ainframe.cache.ehcache")
+@Getter @Setter
 public class EhCacheProperties {
-    @Getter @Setter
     private String config;
-    @Getter @Setter
     private String cacheConfig;
-    @Getter @Setter
     private String charset;
 }
