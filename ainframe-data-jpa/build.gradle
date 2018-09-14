@@ -1,3 +1,4 @@
 dependencies {
+    compile project(':ainframe-core')
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 }

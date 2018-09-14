@@ -8,4 +8,5 @@ include 'ainframe-web-config'
 include 'ainframe-web-module'
 include 'ainframe-web'
 include 'aflow'
+include 'ainframe-test'
 

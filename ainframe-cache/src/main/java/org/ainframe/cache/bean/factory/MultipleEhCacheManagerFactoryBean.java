@@ -31,7 +31,7 @@ public class MultipleEhCacheManagerFactoryBean extends EhCacheManagerFactoryBean
     }
 
     public MultipleEhCacheManagerFactoryBean(String ehcacheLocation, String cacheLocation) {
-        this(ehcacheLocation, StringUtils.delimitedListToStringArray(cacheLocation, ","));
+        this(ehcacheLocation, StringUtils.tokenizeToStringArray(cacheLocation, ","));
     }
 
     public MultipleEhCacheManagerFactoryBean(String ehcacheLocation, String[] cacheLocations) {

@@ -1,4 +1,5 @@
 package org.ainframe.cache.service;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,39 +13,40 @@ import java.util.Date;
  * @since 16. 7. 27.
  */
 @Service
+@CacheConfig(cacheNames = "test")
 public class BasicCacheService {
 
-    @Cacheable("test")
+    @Cacheable
     public long getDate() {
         return System.currentTimeMillis();
     }
 
-    @CacheEvict("test")
+    @CacheEvict
     public long evict() {
         return System.currentTimeMillis();
     }
 
-    @CachePut("test")
+    @CachePut
     public long put() {
         return System.currentTimeMillis();
     }
 
-    @Cacheable(cacheNames = "test", key = "#root.methodName")
+    @Cacheable(key = "#root.methodName")
     public long getDateKey() {
         return System.currentTimeMillis();
     }
 
-    @Cacheable(cacheNames = "test", key = "#root.methodName")
+    @Cacheable(key = "#root.methodName")
     public long getDateKey2() {
         return System.currentTimeMillis();
     }
 
-    @CacheEvict(value = "test", key = "#key")
+    @CacheEvict(key = "#key")
     public long evictKey(String key) {
         return System.currentTimeMillis();
     }
 
-    @CachePut(value = "test", key = "#key")
+    @CachePut(key = "#key")
     public long putKey(String key) {
         return System.currentTimeMillis();
     }

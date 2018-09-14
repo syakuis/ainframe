@@ -1,6 +1,8 @@
 package org.ainframe.cache.autoconfigure;
 
 import org.ainframe.cache.bean.factory.MultipleEhCacheManagerFactoryBean;
+import org.ainframe.core.util.Label;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -16,10 +18,13 @@ import org.springframework.cache.interceptor.SimpleKeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 16. 7. 22.
  */
+@Slf4j
 @Configuration
 @ConditionalOnClass(net.sf.ehcache.CacheManager.class)
 @ConditionalOnMissingBean(type = "org.springframework.cache.CacheManager")
@@ -38,7 +43,13 @@ public class EhCacheAutoConfiguration implements CachingConfigurer {
                 ehCacheProperties.getConfig(), ehCacheProperties.getCacheConfig());
         factoryBean.setCharset(ehCacheProperties.getCharset());
         factoryBean.afterPropertiesSet();
-        return factoryBean.getObject();
+        net.sf.ehcache.CacheManager cacheManager = factoryBean.getObject();
+
+        new Label().title("EHCACHE STARTER")
+            .line()
+            .add("Created Caches: ").add(StringUtils.join(cacheManager.getCacheNames()))
+            .debug();
+        return cacheManager;
     }
 
     @Bean

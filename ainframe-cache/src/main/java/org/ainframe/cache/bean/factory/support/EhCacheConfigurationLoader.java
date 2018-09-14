@@ -1,6 +1,7 @@
 package org.ainframe.cache.bean.factory.support;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.ainframe.core.io.PathsMatchingResourceResolver;
+import org.ainframe.core.util.Label;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -50,9 +54,15 @@ public class EhCacheConfigurationLoader {
 
     private Document getEhcacheXmlLoader() throws EhCacheConfigurationException {
         try {
+            Label label = new Label().title("EHCACHE - Load configuration XML for Ehcache.");
+
             Resource resource = pathMatching.getResource(ehcacheLocation);
-            Assert.isTrue(resource.exists(), "ehcache xml not found.");
-            log.debug("><>< Ehcache Loader: {}", resource.getURI());
+
+            if (resource.exists()) {
+                label.first(resource.getURI());
+            }
+            label.debug();
+            Assert.isTrue(resource.exists(), "The ehcache configuration XML could not be found.");
             return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(resource.getURI().toString());
         } catch (ParserConfigurationException | IOException | SAXException e) {
             throw new EhCacheConfigurationException(e);
@@ -61,12 +71,14 @@ public class EhCacheConfigurationLoader {
 
     private List<Node> getCacheXmlLoader() throws EhCacheConfigurationException {
         try {
+            Label label = new Label().title("EHCACHE - Load configuration XML for cache.");
+
             List<Node> result = new ArrayList<>();
             Resource[] resources = pathsMatching.getResources(cacheLocation);
 
             for (Resource resource : resources) {
                 if (resource.exists()) {
-                    log.debug("><>< Ehcache Loader: {}", resource.getURI());
+                    label.first("Config XML Loader: ").add(resource.getURI());
                     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
                     Document document = dbf.newDocumentBuilder().parse(resource.getURI().toString());
 
@@ -84,6 +96,8 @@ public class EhCacheConfigurationLoader {
                 }
             }
 
+            label.debug();
+
             return result;
         } catch (ParserConfigurationException | IOException | SAXException e) {
             log.error(e.getMessage(), e);
@@ -92,7 +106,11 @@ public class EhCacheConfigurationLoader {
     }
 
     public Resource getResource() throws EhCacheConfigurationException {
-        log.info("><>< Ehcache Setting Create XML");
+        Label label = new Label()
+            .title("EHCACHE - Create configuration XML for Ehcache and create the resource as a result.")
+            .first("ehcacheLocation: ").add(ehcacheLocation)
+            .first("cacheLocation: ").add(StringUtils.join(cacheLocation))
+            .first("charset: ").add(charset);
         try {
             Document document = this.getEhcacheXmlLoader();
             Element rootElement = document.getDocumentElement();
@@ -110,12 +128,17 @@ public class EhCacheConfigurationLoader {
             StreamResult result = new StreamResult(xmlAsWriter);
 
             TransformerFactory.newInstance().newTransformer().transform(source, result);
+            String xml = xmlAsWriter.toString();
+            InputStream inputStream = new ByteArrayInputStream(xml.getBytes(charset));
 
-            InputStream inputStream = new ByteArrayInputStream(xmlAsWriter.toString().getBytes(charset));
+            label.first("ehcache.xml >>>").br().add(xml);
+
             return new InputStreamResource(inputStream);
-        } catch (TransformerException | UnsupportedEncodingException e) {
+        } catch (IOException | TransformerException e) {
             log.error(e.getMessage(), e);
             throw new EhCacheConfigurationException(e);
+        } finally {
+            label.debug();
         }
     }
 }

@@ -1,17 +1,25 @@
-package org.ainframe.web.autoconfigure;
+package org.ainframe.autoconfigure;
 
+import org.ainframe.core.util.Label;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 9. 7.
  */
+@Slf4j
 @Configuration
-@ComponentScan("org.ainframe")
 @EntityScan("org.ainframe")
 @EnableJpaRepositories("org.ainframe")
-public class AinframeAutoConfiguration {
+public class AinframeDataAutoConfiguration {
+    public AinframeDataAutoConfiguration() {
+        if (log.isDebugEnabled()) {
+            new Label().title("DATA-JPA AUTO CONFIGURATION").debug();
+        }
+    }
 }
+

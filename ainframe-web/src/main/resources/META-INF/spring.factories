@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  org.ainframe.web.autoconfigure.AinframeAutoConfiguration
+  org.ainframe.autoconfigure.AinframeWebAutoConfiguration

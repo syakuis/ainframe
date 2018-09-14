@@ -8,7 +8,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.validation.annotation.Validated;
 
 import lombok.Data;
-import lombok.ToString;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -19,7 +18,6 @@ import lombok.ToString;
 @ConfigurationProperties(prefix = "ainframe.web.config")
 @Validated
 @Data
-@ToString
 public class ConfigProperties implements ConfigConfig {
     @NotNull
     private String moduleName;

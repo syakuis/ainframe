@@ -71,6 +71,7 @@ public class ModuleEntity implements Serializable {
     @Column(name = "LAYOUT_IDX")
     private String layoutIdx;
 
+    // todo YN 로 변경하고 EnumType.STRING 설정한다.
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "USE_THEME")
     private YesOrNo onlyUseTheme;
