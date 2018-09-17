@@ -4,6 +4,7 @@ import org.ainframe.web.menu.domain.MenuEntity;
 import org.ainframe.web.menu.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,11 @@ public class CacheMenuService {
     }
 
     @Cacheable(key = "#menuIdx")
-    public MenuEntity getMenu(String menuIdx) {
+    public MenuEntity getMenuWithMenuItem(String menuIdx) {
         return menuRepository.findMenuEntitiesByMenuIdx(menuIdx);
+    }
+
+    @CacheEvict(key = "#menuIdx")
+    public void clear(String menuIdx) {
     }
 }

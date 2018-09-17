@@ -1,5 +1,7 @@
 package org.ainframe.web.menu.repository;
 
+import java.util.List;
+
 import org.ainframe.web.menu.domain.MenuEntity;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.repository.Repository;
@@ -9,6 +11,7 @@ import org.springframework.data.repository.Repository;
  * @since 2018. 9. 11.
  */
 public interface MenuRepository extends Repository<MenuEntity, String> {
+    List<MenuEntity> findAll();
     MenuEntity findOne(String menuIdx);
 
     /**

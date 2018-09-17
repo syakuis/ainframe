@@ -30,4 +30,7 @@ public class MenuProperties implements ModuleProperties {
     private String adminMenuIdx;
     @NotNull
     private String defaultUrlPattern;
+    @NotNull
+    private String rootMenuId;
+
 }

@@ -1,7 +1,10 @@
 package org.ainframe.web.menu.service;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
+import org.ainframe.web.menu.domain.MenuEntity;
 import org.ainframe.web.menu.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +21,13 @@ public class MenuService {
     @Autowired
     public void setMenuRepository(MenuRepository menuRepository) {
         this.menuRepository = menuRepository;
+    }
+
+    public List<MenuEntity> getMenus() {
+        return menuRepository.findAll();
+    }
+
+    public MenuEntity getMenuWithMenuItem(String menuIdx) {
+        return menuRepository.findMenuEntitiesByMenuIdx(menuIdx);
     }
 }
