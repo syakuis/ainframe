@@ -2,6 +2,5 @@ dependencies {
     compile project(':ainframe-context')
     compile project(':ainframe-data-jpa')
     testCompile project(':ainframe-web-config')
-    testCompile 'oracle:ojdbc6:11.1.0.7.0'
     testCompile 'com.h2database:h2'
 }
