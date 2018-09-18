@@ -3,7 +3,7 @@ package org.ainframe.web.menu;
 import static org.junit.Assert.assertEquals;
 
 import org.ainframe.web.menu.domain.MenuEntity;
-import org.ainframe.web.menu.service.CacheMenuService;
+import org.ainframe.web.menu.service.CacheMenuServiceTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +27,14 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class MenuServiceTest {
     @Autowired
-    private CacheMenuService menuService;
+    private CacheMenuServiceTest menuService;
 
     @Autowired
     private CacheManager cacheManager;
 
     @Test
     public void 서비스캐시테스트() {
-        Cache cache = cacheManager.getCache(CacheMenuService.CACHE_NAME);
+        Cache cache = cacheManager.getCache(CacheMenuServiceTest.CACHE_NAME);
         MenuEntity menuEntity = menuService.getMenuWithMenuItem("MENU00000000000ADMIN");
 
         assertEquals(cache.get("MENU00000000000ADMIN", MenuEntity.class), menuEntity);

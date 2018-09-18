@@ -6,16 +6,9 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.ainframe.context.model.Menu;
-import org.ainframe.context.model.MenuTree;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Lists;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -26,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NamedEntityGraph(
     name = "MenuEntity.menuItemEntities", attributeNodes = @NamedAttributeNode("menuItemEntities"))
 @Data
+@Setter(AccessLevel.NONE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -66,13 +60,4 @@ public class MenuEntity implements Serializable {
     @OneToMany(targetEntity = MenuItemEntity.class)
     @JoinColumn(name = "MENU_IDX")
     private List<MenuItemEntity> menuItemEntities;
-
-    public static List<Menu> transformByMenuItemEntities(List<MenuItemEntity> menuItem) {
-        return Lists.transform(menuItem, new Function<MenuItemEntity, Menu>() {
-            @Override
-            public Menu apply(MenuItemEntity input) {
-                return MenuItemEntity.transform(input);
-            }
-        });
-    }
 }

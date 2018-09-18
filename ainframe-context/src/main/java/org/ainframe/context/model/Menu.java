@@ -1,5 +1,7 @@
 package org.ainframe.context.model;
 
+import java.io.Serializable;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Data
 @Setter(AccessLevel.NONE)
-public class Menu {
+public class Menu implements Serializable {
     private final String treeId;
     /**
      * 부모 id

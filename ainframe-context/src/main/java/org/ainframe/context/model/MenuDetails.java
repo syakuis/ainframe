@@ -1,5 +1,6 @@
 package org.ainframe.context.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import lombok.AccessLevel;
@@ -14,7 +15,7 @@ import lombok.Setter;
 @Builder
 @Data
 @Setter(AccessLevel.NONE)
-public class MenuDetails {
+public class MenuDetails implements Serializable {
     private final String menuIdx;
     private final String menuName;
     private final List<Menu> menus;

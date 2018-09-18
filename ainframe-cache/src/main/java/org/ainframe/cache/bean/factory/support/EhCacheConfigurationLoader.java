@@ -1,7 +1,9 @@
 package org.ainframe.cache.bean.factory.support;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.ainframe.core.io.PathsMatchingResourceResolver;
 import org.ainframe.core.util.Label;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;

@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import org.ainframe.context.model.Menu;
-import org.ainframe.context.model.MenuTree;
 import org.ainframe.core.data.enums.YesOrNo;
 import org.ainframe.web.menu.enums.UrlType;
 import org.hibernate.annotations.GenericGenerator;
@@ -123,15 +121,5 @@ public class MenuItemEntity implements Serializable, Comparable<MenuItemEntity> 
     @Override
     public int compareTo(MenuItemEntity o) {
         return this.treeOrder - o.treeOrder;
-    }
-
-    public static Menu transform(MenuItemEntity menuItem) {
-        return MenuTree.builder()
-            .treeId(menuItem.getTreeId())
-            .parentId(menuItem.parentId)
-            .rootParentId(menuItem.rootParentId)
-            .treeName(menuItem.getTreeName())
-            .url(menuItem.getUrl())
-            .build();
     }
 }

@@ -6,8 +6,8 @@ import java.util.Objects;
 import java.util.Random;
 
 import org.ainframe.context.ConfigContext;
-import org.ainframe.context.model.Config;
 import org.ainframe.context.ModuleContext;
+import org.ainframe.context.model.Config;
 import org.ainframe.context.model.Module;
 import org.apache.commons.lang3.StringUtils;
 import org.jmock.lib.concurrent.Blitzer;

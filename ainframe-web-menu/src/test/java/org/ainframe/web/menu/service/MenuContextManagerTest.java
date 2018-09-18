@@ -3,12 +3,13 @@ package org.ainframe.web.menu.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.ainframe.context.MenuContext;
 import org.ainframe.context.model.Menu;
 import org.ainframe.context.model.MenuTree;
 import org.ainframe.web.menu.MenuTreeDebug;
-import org.ainframe.web.menu.domain.MenuItemEntity;
+import org.ainframe.web.menu.config.MenuProperties;
 import org.ainframe.web.menu.repository.MenuItemRepository;
-import org.ainframe.web.menu.repository.MenuRepository;
+import org.ainframe.web.menu.util.MenuItemUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,31 +32,35 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class MenuContextManagerTest {
     @Autowired
+    private MenuProperties menuProperties;
+    @Autowired
     private MenuItemRepository menuItemRepository;
     @Autowired
-    private MenuContextManager menuContextManager;
+    private MenuContext menuContext;
 
     @Test
     public void 현재메뉴찾기() {
         assertEquals(
-            menuContextManager.getCurrentMenu("MENU0000000000000003", "/organization/a-1-1/list").getUrl(),
-            "/organization/a-1-1");
+            menuContext.getCurrentMenu(
+                menuProperties.getDefaultUrlPattern(),"MENU0000000000000003", "/organization/a-1-1/list")
+                .getUrl(), "/organization/a-1-1");
     }
 
     @Test
     public void 현재메뉴에해당하는최상위부모메뉴이하전부얻기() {
-        Menu menu = menuContextManager.getCurrentMenu("MENU0000000000000003", "/organization/a-1-1/list");
+        Menu menu = menuContext.getCurrentMenu(
+            menuProperties.getDefaultUrlPattern(),"MENU0000000000000003", "/organization/a-1-1/list");
+
+        MenuTree menuTree = menuContext
+            .getMenuTreeByTreeId("MENU0000000000000003", menu.getRootParentId());
+        new MenuTreeDebug().displayMenuTree(Lists.newArrayList(menuTree), "MENU0000000000000003");
 
         assertEquals(
-            MenuItemEntity.transform(
+            MenuItemUtils.toMenu(
                 menuItemRepository.findOneByMenuIdxAndTreeId("MENU0000000000000003", menu.getTreeId())),
             menu);
 
         assertNotNull(menuItemRepository.findOneByMenuIdxAndTreeId(
             "MENU0000000000000003", menu.getRootParentId()));
-
-        MenuTree menuTree = menuContextManager
-            .getMenuTreeByTreeId("MENU0000000000000003", menu.getRootParentId());
-        new MenuTreeDebug().displayMenuTree(Lists.newArrayList(menuTree), "MENU0000000000000003");
     }
 }

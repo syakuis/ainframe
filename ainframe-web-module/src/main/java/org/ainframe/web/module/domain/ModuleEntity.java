@@ -7,9 +7,9 @@ import java.util.Map;
 
 import javax.persistence.*;
 
-import org.ainframe.core.data.enums.YesOrNo;
 import org.ainframe.context.model.Module;
 import org.ainframe.context.model.ModuleOption;
+import org.ainframe.core.data.enums.YesOrNo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 

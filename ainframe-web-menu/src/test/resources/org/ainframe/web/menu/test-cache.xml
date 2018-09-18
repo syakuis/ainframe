@@ -1,5 +1,5 @@
 <caches>
-    <cache name="menuContext"
+    <cache name="menuService"
            maxEntriesLocalHeap="10000"
            eternal="true"
            memoryStoreEvictionPolicy="LFU">

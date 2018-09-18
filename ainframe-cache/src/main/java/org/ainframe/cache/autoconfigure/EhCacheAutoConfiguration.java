@@ -46,8 +46,7 @@ public class EhCacheAutoConfiguration implements CachingConfigurer {
         net.sf.ehcache.CacheManager cacheManager = factoryBean.getObject();
 
         new Label().title("EHCACHE STARTER")
-            .line()
-            .add("Created Caches: ").add(StringUtils.join(cacheManager.getCacheNames()))
+            .first("Created Caches: ").add(StringUtils.join(cacheManager.getCacheNames(), ", "))
             .debug();
         return cacheManager;
     }

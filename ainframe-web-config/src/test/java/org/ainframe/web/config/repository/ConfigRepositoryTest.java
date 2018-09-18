@@ -1,8 +1,6 @@
 package org.ainframe.web.config.repository;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.ainframe.web.config.config.ConfigProperties;
 import org.ainframe.web.config.domain.ConfigEntity;

@@ -5,14 +5,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.ainframe.context.model.MenuTree;
 import org.ainframe.core.util.Label;
 import org.ainframe.web.menu.config.MenuProperties;
 import org.ainframe.web.menu.domain.MenuEntity;
 import org.ainframe.web.menu.domain.MenuItemEntity;
 import org.ainframe.web.menu.service.MenuService;
+import org.ainframe.web.menu.util.MenuItemUtils;
 import org.ainframe.web.menu.util.MenuTreeCreator;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +65,7 @@ public class MenuTreeCreatorTest {
         }
 
         MenuTreeCreator menuTree = new MenuTreeCreator(
-            MenuEntity.transformByMenuItemEntities(menuItemEntities), menuProperties.getRootMenuId());
+            MenuItemUtils.toMenus(menuItemEntities), menuProperties.getRootMenuId());
         this.displayMapping(menuTree.getMapping());
         new MenuTreeDebug().displayMenuTree(menuTree.getMenuTrees(), menuProperties.getRootMenuId());
     }

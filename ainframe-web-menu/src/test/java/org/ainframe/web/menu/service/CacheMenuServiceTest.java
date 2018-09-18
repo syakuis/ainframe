@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @CacheConfig(cacheNames = "menuService")
-public class CacheMenuService {
+public class CacheMenuServiceTest {
     public static final String CACHE_NAME = "menuService";
     private MenuRepository menuRepository;
 
