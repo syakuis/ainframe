@@ -9,4 +9,5 @@ include 'ainframe-web-module'
 include 'ainframe-web'
 include 'aflow'
 include 'ainframe-test'
+include 'ainframe-web-layout'
 

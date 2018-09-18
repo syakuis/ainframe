@@ -3,5 +3,7 @@ dependencies {
     compile project(':ainframe-data-jpa')
     compile project(':ainframe-web-config')
     compile project(':ainframe-web-module')
+    compile project(':ainframe-web-menu')
+    compile project(':ainframe-web-layout')
     testCompile 'com.h2database:h2'
 }
