@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@EnableAutoConfiguration
 @ActiveProfiles("real")
 public class ModuleViewResolverTest {
     @Autowired
