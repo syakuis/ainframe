@@ -1,0 +1,6 @@
+dependencies {
+    compile project(':ainframe-core')
+    compile project(':ainframe-data-jpa')
+    testCompile project(':ainframe-config')
+    testCompile 'com.h2database:h2'
+}

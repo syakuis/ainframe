@@ -1,6 +1,6 @@
 package org.ainframe.web.view;
 
-import org.ainframe.context.model.Module;
+import org.ainframe.context.Module;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

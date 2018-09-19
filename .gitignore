@@ -3,4 +3,4 @@
 *.iws
 /.gradle
 build/
-aflow/
+**/application-real.properties

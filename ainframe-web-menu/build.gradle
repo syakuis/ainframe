@@ -1,8 +1,0 @@
-dependencies {
-    compile project(':ainframe-context')
-    compile project(':ainframe-cache')
-    compile project(':ainframe-data-jpa')
-    testCompile project(':ainframe-web-config')
-    testCompile project(':ainframe-web-module')
-    testCompile 'com.h2database:h2'
-}

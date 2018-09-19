@@ -2,8 +2,8 @@ package org.ainframe.web.view;
 
 import java.io.File;
 
-import org.ainframe.context.model.Config;
-import org.ainframe.context.model.Module;
+import org.ainframe.context.Config;
+import org.ainframe.context.Module;
 import org.ainframe.core.util.PathUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.ModelAndView;

@@ -1,29 +1,27 @@
-package kr.co.aintop.aflow;
+package org.ainframe.web.config.config;
 
-import org.ainframe.context.ModuleContext;
-import org.ainframe.context.Module;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.env.Environment;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
- * @since 2018. 8. 30.
+ * @since 2018. 9. 13.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class AflowTest {
+@ActiveProfiles("test")
+public class ConfigPropertiesTest {
     @Autowired
-    private ModuleContext moduleContext;
-
-    @Autowired
-    private Environment environment;
+    private ConfigProperties configProperties;
 
     @Test
     public void test() {
-        Module module = moduleContext.getModule("board");
+        assertEquals(configProperties.getModuleName(), "config");
     }
 }
