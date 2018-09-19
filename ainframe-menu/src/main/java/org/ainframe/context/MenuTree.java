@@ -2,10 +2,7 @@ package org.ainframe.context;
 
 import java.util.List;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -13,6 +10,7 @@ import lombok.Setter;
  */
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Setter(AccessLevel.NONE)
 public class MenuTree extends Menu {
     private final int treeDepth;

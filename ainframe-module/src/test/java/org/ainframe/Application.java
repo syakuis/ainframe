@@ -1,11 +1,11 @@
-package kr.co.aintop.aflow;
+package org.ainframe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
- * @since 2018. 9. 7.
+ * @since 2018. 8. 27.
  */
 @SpringBootApplication
 public class Application {

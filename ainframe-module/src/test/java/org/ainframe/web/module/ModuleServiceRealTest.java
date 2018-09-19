@@ -22,7 +22,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("real")
 @EnableAutoConfiguration
 @Transactional
-public class RealModuleServiceTest {
+public class ModuleServiceRealTest {
 
     @Autowired
     private ModuleService moduleService;

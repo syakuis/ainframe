@@ -13,8 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Configuration
 @ComponentScan("org.ainframe")
-public class AinframeWebAutoConfiguration {
-    public AinframeWebAutoConfiguration() {
+public class WebAutoConfiguration {
+    public WebAutoConfiguration() {
         if (log.isDebugEnabled()) {
             new Label().title("CONTEXT AUTO CONFIGURATION").debug();
         }

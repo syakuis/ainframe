@@ -3,8 +3,8 @@ package org.ainframe.web.menu.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.ainframe.context.MenuContext;
 import org.ainframe.context.Menu;
+import org.ainframe.context.MenuContext;
 import org.ainframe.context.MenuTree;
 import org.ainframe.web.menu.MenuTreeDebug;
 import org.ainframe.web.menu.config.MenuProperties;
@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 @ActiveProfiles("real")
 @Transactional
-public class MenuContextManagerTest {
+public class MenuContextManagerRealTest {
     @Autowired
     private MenuProperties menuProperties;
     @Autowired

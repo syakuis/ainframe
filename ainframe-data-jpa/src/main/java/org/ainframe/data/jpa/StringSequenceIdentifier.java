@@ -15,12 +15,10 @@ import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.Type;
 
-import com.sun.corba.se.spi.ior.Identifiable;
-
 public class StringSequenceIdentifier
         implements IdentifierGenerator, Configurable {
 
-    public static final String SEQUENCE_PREFIX = "sequence_prefix";
+    private final String SEQUENCE_PREFIX = "sequence_prefix";
 
     private String sequencePrefix;
 
@@ -60,13 +58,6 @@ public class StringSequenceIdentifier
 
     @Override
     public Serializable generate(SessionImplementor session, Object obj) {
-        if (obj instanceof Identifiable) {
-            Identifiable identifiable = (Identifiable) obj;
-            Serializable id = identifiable.getId();
-            if (id != null) {
-                return id;
-            }
-        }
         long seqValue = ((Number) Session.class.cast(session)
             .createSQLQuery(sequenceCallSyntax)
             .uniqueResult()).longValue();

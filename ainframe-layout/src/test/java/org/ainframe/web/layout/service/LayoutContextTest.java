@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("real")
+@ActiveProfiles("test")
 @Transactional
 public class LayoutContextTest {
     @Autowired

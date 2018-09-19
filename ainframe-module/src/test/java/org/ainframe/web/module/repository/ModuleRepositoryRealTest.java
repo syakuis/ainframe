@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @EnableAutoConfiguration
 @Transactional
 @ActiveProfiles("real")
-public class RealModuleRepositoryTest {
+public class ModuleRepositoryRealTest {
 
     @Autowired
     private ModuleRepository moduleRepository;

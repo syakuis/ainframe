@@ -15,8 +15,8 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @EntityScan("org.ainframe")
 @EnableJpaRepositories("org.ainframe")
-public class AinframeDataAutoConfiguration {
-    public AinframeDataAutoConfiguration() {
+public class JpaDataAutoConfiguration {
+    public JpaDataAutoConfiguration() {
         if (log.isDebugEnabled()) {
             new Label().title("DATA-JPA AUTO CONFIGURATION").debug();
         }

@@ -26,8 +26,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Configuration
-@ConditionalOnClass(net.sf.ehcache.CacheManager.class)
-@ConditionalOnMissingBean(type = "org.springframework.cache.CacheManager")
+@ConditionalOnClass(name = "net.sf.ehcache.CacheManager")
 @EnableConfigurationProperties(EhCacheProperties.class)
 @EnableCaching
 public class EhCacheAutoConfiguration implements CachingConfigurer {
@@ -36,7 +35,7 @@ public class EhCacheAutoConfiguration implements CachingConfigurer {
     private EhCacheProperties ehCacheProperties;
 
     @Bean(destroyMethod="shutdown")
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(net.sf.ehcache.CacheManager.class)
     public net.sf.ehcache.CacheManager ehCacheManager() {
         MultipleEhCacheManagerFactoryBean factoryBean =
             new MultipleEhCacheManagerFactoryBean(
@@ -52,7 +51,7 @@ public class EhCacheAutoConfiguration implements CachingConfigurer {
     }
 
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(CacheManager.class)
     @Override
     public CacheManager cacheManager() {
         return new EhCacheCacheManager(ehCacheManager());
