@@ -1,11 +1,32 @@
 # AIN-FRAME (가칭)
 
-## 라이브러리
+## 사용한 것들...
 
 - java 7
 - spring 4 & spring-boot 1.5
 - spring-data-jpa
 - ehcache
+
+## 할일
+
+- context
+    - [x] config
+    - [ ] menu
+    - [ ] layout
+    - [ ] module
+- ModuleViewResolver
+    - [ ] Module, Layout Context Handler
+    - [ ] ModuleView & ModuleViewResolver
+    - [ ] ModuleViewResolver Annotation : AOP
+    - [ ] layout
+    - [ ] skin
+- View UI : Controller
+    - [ ] layout
+    - [ ] module
+    - [ ] config
+    - [ ] menu
+- Security
+
 
 ## package flow
 

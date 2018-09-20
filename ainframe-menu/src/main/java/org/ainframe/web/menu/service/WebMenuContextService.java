@@ -7,8 +7,8 @@ import org.ainframe.context.Menu;
 import org.ainframe.context.MenuContextService;
 import org.ainframe.context.MenuDetails;
 import org.ainframe.web.menu.config.MenuProperties;
+import org.ainframe.web.menu.domain.MenuDetailsEntity;
 import org.ainframe.web.menu.domain.MenuEntity;
-import org.ainframe.web.menu.domain.MenuItemEntity;
 import org.ainframe.web.menu.util.MenuItemUtils;
 import org.ainframe.web.menu.util.MenuTreeCreator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +37,15 @@ public class WebMenuContextService implements MenuContextService {
 
     @Override
     public MenuDetails getMenuDetails(String menuIdx) {
-        MenuEntity menuEntity = menuService.getMenuWithMenuItem(menuIdx);
+        MenuDetailsEntity menuDetailsEntity = menuService.getMenuWithMenuItem(menuIdx);
 
-        List<MenuItemEntity> menuItemEntities = menuEntity.getMenuItemEntities();
+        List<MenuEntity> menuItemEntities = menuDetailsEntity.getMenuItemEntities();
         Collections.sort(menuItemEntities);
         List<Menu> menus = MenuItemUtils.toMenus(menuItemEntities);
 
         return MenuDetails.builder()
-            .menuIdx(menuEntity.getMenuIdx())
-            .menuName(menuEntity.getMenuName())
+            .menuIdx(menuDetailsEntity.getMenuIdx())
+            .menuName(menuDetailsEntity.getMenuName())
             .menus(menus)
             .menuTrees(new MenuTreeCreator(menus, menuProperties.getRootMenuId()).getMenuTrees())
             .build();

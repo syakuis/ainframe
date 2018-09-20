@@ -1,6 +1,6 @@
 package org.ainframe.web.menu.service;
 
-import org.ainframe.web.menu.domain.MenuEntity;
+import org.ainframe.web.menu.domain.MenuDetailsEntity;
 import org.ainframe.web.menu.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -26,7 +26,7 @@ public class CacheMenuServiceTest {
     }
 
     @Cacheable(key = "#menuIdx")
-    public MenuEntity getMenuWithMenuItem(String menuIdx) {
+    public MenuDetailsEntity getMenuWithMenuItem(String menuIdx) {
         return menuRepository.findMenuEntitiesByMenuIdx(menuIdx);
     }
 

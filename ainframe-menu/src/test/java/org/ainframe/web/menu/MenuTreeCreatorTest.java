@@ -7,8 +7,8 @@ import java.util.Map;
 
 import org.ainframe.core.util.Label;
 import org.ainframe.web.menu.config.MenuProperties;
+import org.ainframe.web.menu.domain.MenuDetailsEntity;
 import org.ainframe.web.menu.domain.MenuEntity;
-import org.ainframe.web.menu.domain.MenuItemEntity;
 import org.ainframe.web.menu.service.MenuService;
 import org.ainframe.web.menu.util.MenuItemUtils;
 import org.ainframe.web.menu.util.MenuTreeCreator;
@@ -51,21 +51,21 @@ public class MenuTreeCreatorTest {
         label.debug();
     }
 
-    private List<MenuItemEntity> getMenuItemEntities() {
-        MenuEntity menuEntity = menuService.getMenuWithMenuItem("MENU0000000000000003");
-        return menuEntity.getMenuItemEntities();
+    private List<MenuEntity> getMenuItemEntities() {
+        MenuDetailsEntity menuDetailsEntity = menuService.getMenuWithMenuItem("MENU0000000000000003");
+        return menuDetailsEntity.getMenuEntities();
     }
 
     @Test
     public void 메뉴를트리형태로만들기() {
-        List<MenuItemEntity> menuItemEntities = getMenuItemEntities();
-        Collections.sort(menuItemEntities);
-        for (MenuItemEntity menuItemEntity : menuItemEntities) {
-            log.debug("{} = {} : {}", menuItemEntity.getTreeOrder(), menuItemEntity.getTreeName(), menuItemEntity.getParentId());
+        List<MenuEntity> menuEntities = getMenuItemEntities();
+        Collections.sort(menuEntities);
+        for (MenuEntity menuEntity : menuEntities) {
+            log.debug("{} = {} : {}", menuEntity.getTreeOrder(), menuEntity.getTreeName(), menuEntity.getParentId());
         }
 
         MenuTreeCreator menuTree = new MenuTreeCreator(
-            MenuItemUtils.toMenus(menuItemEntities), menuProperties.getRootMenuId());
+            MenuItemUtils.toMenus(menuEntities), menuProperties.getRootMenuId());
         this.displayMapping(menuTree.getMapping());
         new MenuTreeDebug().displayMenuTree(menuTree.getMenuTrees(), menuProperties.getRootMenuId());
     }
