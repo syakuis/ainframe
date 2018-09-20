@@ -14,7 +14,7 @@ import lombok.Data;
  * @since 2018. 8. 30.
  */
 @Configuration
-@PropertySource("classpath:/org/ainframe/web/config/config/application.properties")
+@PropertySource("classpath:/org/ainframe/web/config/config/config.properties")
 @ConfigurationProperties(prefix = "ainframe.web.config")
 @Validated
 @Data

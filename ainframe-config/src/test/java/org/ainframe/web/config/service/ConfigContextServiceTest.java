@@ -2,10 +2,9 @@ package org.ainframe.web.config.service;
 
 import static org.junit.Assert.*;
 
-import org.ainframe.context.Config;
 import org.ainframe.context.ConfigContext;
 import org.ainframe.context.ConfigContextService;
-import org.ainframe.web.config.domain.ConfigObject;
+import org.ainframe.web.config.model.Config;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-@ActiveProfiles("real")
-public class ConfigContextServiceRealTest {
+@ActiveProfiles("test")
+public class ConfigContextServiceTest {
     @Autowired
     private ConfigService configService;
     @Autowired
@@ -33,19 +32,14 @@ public class ConfigContextServiceRealTest {
 
     @Test
     public void test() {
-        ConfigObject configObject = configService.getConfig();
-        ConfigObject configObject2 = configService.getConfig();
+        Config configObject = configService.getConfig();
+        Config configObject2 = configService.getConfig();
         assertEquals(configObject, configObject2);
-        assertTrue(configObject == configObject2);
+        assertSame(configObject, configObject2);
 
-        // ModelMapper 때문에 객체가 새로 만들어진다. 동등성은 맞아도 동일성은 맞지 않다.
         Config config = configContextService.getConfig();
-        Config config2 = configContextService.getConfig();
-        assertEquals(config, config2);
-        assertTrue(config != config2);
-
         assertNotNull(config.getModuleIdx());
         assertEquals(config, configContext.getConfig());
-        assertTrue(config != configContext.getConfig());
+        assertSame(config, configContext.getConfig());
     }
 }

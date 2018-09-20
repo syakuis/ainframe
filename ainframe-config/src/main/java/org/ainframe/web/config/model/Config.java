@@ -1,4 +1,4 @@
-package org.ainframe.context;
+package org.ainframe.web.config.model;
 
 import java.io.Serializable;
 

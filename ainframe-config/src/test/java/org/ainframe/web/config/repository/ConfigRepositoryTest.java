@@ -28,18 +28,21 @@ public class ConfigRepositoryTest {
     private ConfigRepository configRepository;
 
     @Test
-    public void crud() {
+    public void test() {
         assertNotNull(configProperties.getModuleIdx());
+        assertEquals(configProperties.getModuleIdx(),
+            configRepository.findOneByModuleIdx(configProperties.getModuleIdx()).getModuleIdx());
+
         ConfigEntity configEntity = ConfigEntity.builder()
-                .moduleIdx(configProperties.getModuleIdx())
+                .moduleIdx("MODUL000000001CONFIG")
                 .basicSkin("cdc")
                 .skin("gbdc")
                 .indexPage("/main")
                 .build();
         configRepository.save(configEntity);
 
-        assertEquals(configEntity, configRepository.findOneByModuleIdx(configProperties.getModuleIdx()));
-        assertTrue(configEntity == configRepository.findOneByModuleIdx(configProperties.getModuleIdx()));
+        assertEquals(configEntity, configRepository.findOneByModuleIdx("MODUL000000001CONFIG"));
+        assertSame(configEntity, configRepository.findOneByModuleIdx("MODUL000000001CONFIG"));
 
     }
 }

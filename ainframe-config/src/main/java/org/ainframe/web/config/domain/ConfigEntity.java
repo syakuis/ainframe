@@ -3,13 +3,11 @@ package org.ainframe.web.config.domain;
 import javax.persistence.*;
 
 import org.ainframe.core.data.enums.YesOrNo;
+import org.ainframe.web.config.model.Config;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -18,10 +16,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "CONFIG")
 @Data
+@Setter(AccessLevel.NONE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ConfigEntity implements ConfigObject {
+public class ConfigEntity implements Config {
     @SequenceGenerator(
         name = "CONFIG_IDX_GEN",
         sequenceName = "CONFIG_IDX_SEQ",

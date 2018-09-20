@@ -1,7 +1,7 @@
 package org.ainframe.web.config.service;
 
 import org.ainframe.web.config.config.ConfigConfig;
-import org.ainframe.web.config.domain.ConfigObject;
+import org.ainframe.web.config.model.Config;
 import org.ainframe.web.config.repository.ConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class ConfigService {
         this.config = config;
     }
 
-    public ConfigObject getConfig() {
+    public Config getConfig() {
         return this.configRepository.findOneByModuleIdx(config.getModuleIdx());
     }
 }
