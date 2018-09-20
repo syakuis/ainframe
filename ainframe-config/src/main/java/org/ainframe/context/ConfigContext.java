@@ -2,6 +2,7 @@ package org.ainframe.context;
 
 import org.ainframe.web.config.model.Config;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,6 +17,7 @@ public class ConfigContext {
     private ConfigContextService configContextService;
 
     @Autowired
+    @Qualifier("cacheConfigContextService")
     public void setConfigContextService(ConfigContextService configContextService) {
         this.configContextService = configContextService;
     }

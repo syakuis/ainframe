@@ -8,6 +8,7 @@ import org.ainframe.web.config.model.Config;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,22 +25,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class ConfigContextServiceTest {
     @Autowired
     private ConfigService configService;
-    @Autowired
-    private ConfigContextService configContextService;
 
     @Autowired
-    private ConfigContext configContext;
+    @Qualifier("webConfigContextService")
+    private ConfigContextService configContextService;
 
     @Test
     public void test() {
         Config configObject = configService.getConfig();
-        Config configObject2 = configService.getConfig();
+        Config configObject2 = configContextService.getConfig();
         assertEquals(configObject, configObject2);
         assertSame(configObject, configObject2);
-
-        Config config = configContextService.getConfig();
-        assertNotNull(config.getModuleIdx());
-        assertEquals(config, configContext.getConfig());
-        assertSame(config, configContext.getConfig());
     }
 }
