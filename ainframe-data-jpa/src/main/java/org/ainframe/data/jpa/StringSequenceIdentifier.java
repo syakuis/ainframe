@@ -15,8 +15,7 @@ import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.Type;
 
-public class StringSequenceIdentifier
-        implements IdentifierGenerator, Configurable {
+public class StringSequenceIdentifier implements IdentifierGenerator, Configurable {
 
     private final String SEQUENCE_PREFIX = "sequence_prefix";
 

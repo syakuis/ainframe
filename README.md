@@ -1,5 +1,12 @@
 # AIN-FRAME (가칭)
 
+## 라이브러리
+
+- java 7
+- spring 4 & spring-boot 1.5
+- spring-data-jpa
+- ehcache
+
 ## package flow
 
 ```
@@ -49,10 +56,3 @@
 
 - @SpringBootApplication 하위 패키지만 읽어들이기 때문에 메인 프로젝트를 제외한 의존 프로젝트는 직접 autoConfiguration 을 구현하여 작동하게 한다.
 - 설정 프로퍼티는 메인 프로젝트에 필요한 모든 설정을 추가해야 한다.
-
-```aspectj
-/--------- AINFRAME >>>
-| ________ EHCACHE STARTER ________
-| Created Caches: test
-----------/
-```
