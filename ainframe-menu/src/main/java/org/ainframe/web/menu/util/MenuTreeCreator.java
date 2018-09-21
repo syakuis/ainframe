@@ -1,14 +1,13 @@
 package org.ainframe.web.menu.util;
 
-import java.util.*;
-
-import org.ainframe.context.Menu;
-import org.ainframe.context.MenuTree;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.ainframe.web.menu.model.MenuNode;
+import org.ainframe.web.menu.model.MenuTree;
+
+import java.util.*;
 
 /**
  * 목록으로 구성된 메뉴 항목들을 트리 형태로 변경한다.
@@ -18,12 +17,12 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class MenuTreeCreator {
-    private final List<Menu> menus;
+    private final List<MenuNode> menuNodes;
     private Map<String, Integer> mapping;
     private List<MenuTree> menuTrees;
 
-    public MenuTreeCreator(List<Menu> menus, String rootMenuId) {
-        this.menus = menus;
+    public MenuTreeCreator(List<MenuNode> menuNodes, String rootMenuId) {
+        this.menuNodes = menuNodes;
         this.mapping();
         this.menuTrees = this.create(rootMenuId);
     }
@@ -49,8 +48,8 @@ public class MenuTreeCreator {
      */
     private void mapping() {
         this.mapping = new HashMap<>();
-        for (Menu menu : menus) {
-            String parentId = menu.getParentId();
+        for (MenuNode menuNode : menuNodes) {
+            String parentId = menuNode.getParentId();
             if (parentId != null && this.mapping.containsKey(parentId)) {
                 this.mapping.put(parentId, this.mapping.get(parentId) + 1);
             } else {
@@ -99,22 +98,22 @@ public class MenuTreeCreator {
     private List<MenuTree> create(String parentId, int index, int depth, List<String> breadcrumb) {
         int aDepth = depth + 1;
         List<MenuTree> result = new ArrayList<>();
-        int count = menus.size();
+        int count = menuNodes.size();
         for (int i = index; i < count; i++) {
-            Menu menu = menus.get(i);
-            String aTreeId = menu.getTreeId();
-            String aParentId = menu.getParentId();
+            MenuNode menuNode = menuNodes.get(i);
+            String aTreeId = menuNode.getTreeId();
+            String aParentId = menuNode.getParentId();
 
             List<String> aBreadcrumb = this.breadcrumb(breadcrumb, aDepth, aTreeId);
 
             if (Objects.equals(parentId, aParentId) && mapping.containsKey(aParentId)) {
                 result.add(MenuTree.builder()
-                    .treeName(menu.getTreeName())
+                    .treeName(menuNode.getTreeName())
                     .parentId(aParentId)
-                    .rootParentId(menu.getRootParentId())
+                    .rootParentId(menuNode.getRootParentId())
                     .treeId(aTreeId)
                     .treeDepth(aDepth)
-                    .url(menu.getUrl())
+                    .url(menuNode.getUrl())
                     .breadcrumb(aBreadcrumb)
                     .menus(create(aTreeId, i+1, aDepth, aBreadcrumb))
                     .build());

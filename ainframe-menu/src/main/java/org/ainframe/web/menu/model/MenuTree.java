@@ -1,18 +1,17 @@
-package org.ainframe.context;
-
-import java.util.List;
+package org.ainframe.web.menu.model;
 
 import lombok.*;
+
+import java.util.List;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 9. 13.
  */
-
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Setter(AccessLevel.NONE)
-public class MenuTree extends Menu {
+public class MenuTree extends MenuNode {
     private final int treeDepth;
     /**
      * 메뉴 경로

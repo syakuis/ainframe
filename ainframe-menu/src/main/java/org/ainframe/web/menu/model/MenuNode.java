@@ -1,11 +1,11 @@
-package org.ainframe.context;
-
-import java.io.Serializable;
+package org.ainframe.web.menu.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Setter;
+
+import java.io.Serializable;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Data
 @Setter(AccessLevel.NONE)
-public class Menu implements Serializable {
+public class MenuNode implements Serializable {
     private final String treeId;
     /**
      * 부모 id

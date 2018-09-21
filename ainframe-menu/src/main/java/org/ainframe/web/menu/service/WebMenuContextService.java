@@ -1,19 +1,19 @@
 package org.ainframe.web.menu.service;
 
-import java.util.Collections;
-import java.util.List;
-
-import org.ainframe.context.Menu;
 import org.ainframe.context.MenuContextService;
-import org.ainframe.context.MenuDetails;
 import org.ainframe.web.menu.config.MenuProperties;
-import org.ainframe.web.menu.domain.MenuDetailsEntity;
-import org.ainframe.web.menu.domain.MenuEntity;
-import org.ainframe.web.menu.util.MenuItemUtils;
+import org.ainframe.web.menu.domain.MenuNodeEntity;
+import org.ainframe.web.menu.domain.MenuTreeEntity;
+import org.ainframe.web.menu.model.Menu;
+import org.ainframe.web.menu.model.MenuNode;
+import org.ainframe.web.menu.util.MenuNodeUtils;
 import org.ainframe.web.menu.util.MenuTreeCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -36,18 +36,18 @@ public class WebMenuContextService implements MenuContextService {
     }
 
     @Override
-    public MenuDetails getMenuDetails(String menuIdx) {
-        MenuDetailsEntity menuDetailsEntity = menuService.getMenuWithMenuItem(menuIdx);
+    public Menu getMenu(String menuIdx) {
+        MenuTreeEntity menuTreeEntity = menuService.getMenuTreeByMenuIdx(menuIdx);
 
-        List<MenuEntity> menuItemEntities = menuDetailsEntity.getMenuItemEntities();
-        Collections.sort(menuItemEntities);
-        List<Menu> menus = MenuItemUtils.toMenus(menuItemEntities);
+        List<MenuNodeEntity> menuNodeEntities = menuTreeEntity.getMenuNodeEntities();
+        Collections.sort(menuNodeEntities);
+        List<MenuNode> menuNodes = MenuNodeUtils.toMenus(menuNodeEntities);
 
-        return MenuDetails.builder()
-            .menuIdx(menuDetailsEntity.getMenuIdx())
-            .menuName(menuDetailsEntity.getMenuName())
-            .menus(menus)
-            .menuTrees(new MenuTreeCreator(menus, menuProperties.getRootMenuId()).getMenuTrees())
+        return Menu.builder()
+            .menuIdx(menuTreeEntity.getMenuIdx())
+            .menuName(menuTreeEntity.getMenuName())
+            .menuNodes(menuNodes)
+            .menuTrees(new MenuTreeCreator(menuNodes, menuProperties.getRootMenuId()).getMenuTrees())
             .build();
     }
 }

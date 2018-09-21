@@ -1,16 +1,10 @@
 package org.ainframe.web.menu;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
+import lombok.extern.slf4j.Slf4j;
 import org.ainframe.core.util.Label;
 import org.ainframe.web.menu.config.MenuProperties;
-import org.ainframe.web.menu.domain.MenuDetailsEntity;
-import org.ainframe.web.menu.domain.MenuEntity;
-import org.ainframe.web.menu.service.MenuService;
-import org.ainframe.web.menu.util.MenuItemUtils;
+import org.ainframe.web.menu.model.MenuNode;
+import org.ainframe.web.menu.service.CacheMenuContextService;
 import org.ainframe.web.menu.util.MenuTreeCreator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +14,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -29,11 +25,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("real")
+@ActiveProfiles("test")
 @Transactional
 public class MenuTreeCreatorTest {
     @Autowired
-    private MenuService menuService;
+    private CacheMenuContextService cacheMenuContextService;
 
     @Autowired
     private MenuProperties menuProperties;
@@ -51,21 +47,14 @@ public class MenuTreeCreatorTest {
         label.debug();
     }
 
-    private List<MenuEntity> getMenuItemEntities() {
-        MenuDetailsEntity menuDetailsEntity = menuService.getMenuWithMenuItem("MENU0000000000000003");
-        return menuDetailsEntity.getMenuEntities();
-    }
-
     @Test
     public void 메뉴를트리형태로만들기() {
-        List<MenuEntity> menuEntities = getMenuItemEntities();
-        Collections.sort(menuEntities);
-        for (MenuEntity menuEntity : menuEntities) {
-            log.debug("{} = {} : {}", menuEntity.getTreeOrder(), menuEntity.getTreeName(), menuEntity.getParentId());
+        List<MenuNode> menuNodes = cacheMenuContextService.getMenu("MENU0000000000000003").getMenuNodes();
+        for (MenuNode menuNode : menuNodes) {
+            log.debug("{} = {}", menuNode.getTreeName(), menuNode.getParentId());
         }
 
-        MenuTreeCreator menuTree = new MenuTreeCreator(
-            MenuItemUtils.toMenus(menuEntities), menuProperties.getRootMenuId());
+        MenuTreeCreator menuTree = new MenuTreeCreator(menuNodes, menuProperties.getRootMenuId());
         this.displayMapping(menuTree.getMapping());
         new MenuTreeDebug().displayMenuTree(menuTree.getMenuTrees(), menuProperties.getRootMenuId());
     }

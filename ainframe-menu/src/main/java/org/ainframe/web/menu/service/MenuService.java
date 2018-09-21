@@ -1,13 +1,12 @@
 package org.ainframe.web.menu.service;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.ainframe.web.menu.domain.MenuDetailsEntity;
-import org.ainframe.web.menu.repository.MenuRepository;
+import org.ainframe.web.menu.domain.MenuTreeEntity;
+import org.ainframe.web.menu.repository.MenuTreeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -16,18 +15,18 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class MenuService {
-    private MenuRepository menuRepository;
+    private MenuTreeRepository menuTreeRepository;
 
     @Autowired
-    public void setMenuRepository(MenuRepository menuRepository) {
-        this.menuRepository = menuRepository;
+    public void setMenuTreeRepository(MenuTreeRepository menuTreeRepository) {
+        this.menuTreeRepository = menuTreeRepository;
     }
 
-    public List<MenuDetailsEntity> getMenus() {
-        return menuRepository.findAll();
+    public List<MenuTreeEntity> getMenus() {
+        return menuTreeRepository.findAll();
     }
 
-    public MenuDetailsEntity getMenuWithMenuItem(String menuIdx) {
-        return menuRepository.findMenuEntitiesByMenuIdx(menuIdx);
+    public MenuTreeEntity getMenuTreeByMenuIdx(String menuIdx) {
+        return menuTreeRepository.findOne(menuIdx);
     }
 }

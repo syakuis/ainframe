@@ -1,17 +1,12 @@
 package org.ainframe.web.menu.domain;
 
-import java.io.Serializable;
-
-import javax.persistence.*;
-
+import lombok.*;
 import org.ainframe.core.data.enums.YesOrNo;
 import org.ainframe.web.menu.enums.UrlType;
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -20,10 +15,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "MENU_TREE")
 @Data
+@Setter(AccessLevel.NONE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MenuEntity implements Serializable, Comparable<MenuEntity> {
+public class MenuNodeEntity implements Serializable, Comparable<MenuNodeEntity> {
     @Column(name = "MENU_IDX")
     private String menuIdx;
 
@@ -90,7 +86,7 @@ public class MenuEntity implements Serializable, Comparable<MenuEntity> {
     private String urlWindow;
     /**
      * Anti Style 이용하여 대상이 되는 모든 경로를 현재 메뉴로 인정한다.
-     * 기본 값은 {@link MenuEntity#getUrl()}/** 사용된다.
+     * 기본 값은 {@link MenuNodeEntity#getUrl()}/** 사용된다.
      */
     @Column(name = "URL_PATTERN")
     private String urlPattern;
@@ -119,7 +115,7 @@ public class MenuEntity implements Serializable, Comparable<MenuEntity> {
     private YesOrNo hidden;
 
     @Override
-    public int compareTo(MenuEntity o) {
+    public int compareTo(MenuNodeEntity o) {
         return this.treeOrder - o.treeOrder;
     }
 }

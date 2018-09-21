@@ -1,14 +1,12 @@
 package org.ainframe.web.menu.domain;
 
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
-import javax.persistence.*;
-
-import org.hibernate.annotations.GenericGenerator;
-
-import lombok.*;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -16,14 +14,12 @@ import lombok.*;
  */
 @Entity
 @Table(name = "MENU")
-@NamedEntityGraph(
-    name = "MenuDetailsEntity.menuItemEntities", attributeNodes = @NamedAttributeNode("menuItemEntities"))
 @Data
 @Setter(AccessLevel.NONE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MenuDetailsEntity implements Serializable {
+public class MenuTreeEntity implements Serializable {
     @Column(name = "MENU_IDX", nullable = false, length = 20)
     @Id
     @SequenceGenerator(
@@ -57,7 +53,7 @@ public class MenuDetailsEntity implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date modifiedDate;
 
-    @OneToMany(targetEntity = MenuEntity.class)
+    @OneToMany(targetEntity = MenuNodeEntity.class)
     @JoinColumn(name = "MENU_IDX")
-    private List<MenuEntity> menuEntities;
+    private List<MenuNodeEntity> menuNodeEntities;
 }

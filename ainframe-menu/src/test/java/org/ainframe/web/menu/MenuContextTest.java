@@ -1,15 +1,11 @@
-package org.ainframe.web.menu.service;
+package org.ainframe.web.menu;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import org.ainframe.context.Menu;
+import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.ainframe.context.MenuContext;
-import org.ainframe.context.MenuTree;
-import org.ainframe.web.menu.MenuTreeDebug;
 import org.ainframe.web.menu.config.MenuProperties;
-import org.ainframe.web.menu.repository.MenuItemRepository;
-import org.ainframe.web.menu.util.MenuItemUtils;
+import org.ainframe.web.menu.model.MenuNode;
+import org.ainframe.web.menu.model.MenuTree;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Lists;
-import lombok.extern.slf4j.Slf4j;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -28,13 +23,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("real")
+@ActiveProfiles("test")
 @Transactional
-public class MenuContextManagerRealTest {
+public class MenuContextTest {
     @Autowired
     private MenuProperties menuProperties;
-    @Autowired
-    private MenuItemRepository menuItemRepository;
+
     @Autowired
     private MenuContext menuContext;
 
@@ -48,19 +42,11 @@ public class MenuContextManagerRealTest {
 
     @Test
     public void 현재메뉴에해당하는최상위부모메뉴이하전부얻기() {
-        Menu menu = menuContext.getCurrentMenu(
+        MenuNode menuNode = menuContext.getCurrentMenu(
             menuProperties.getDefaultUrlPattern(),"MENU0000000000000003", "/organization/a-1-1/list");
 
         MenuTree menuTree = menuContext
-            .getMenuTreeByTreeId("MENU0000000000000003", menu.getRootParentId());
+            .getMenuTreeByTreeId("MENU0000000000000003", menuNode.getRootParentId());
         new MenuTreeDebug().displayMenuTree(Lists.newArrayList(menuTree), "MENU0000000000000003");
-
-        assertEquals(
-            MenuItemUtils.toMenu(
-                menuItemRepository.findOneByMenuIdxAndTreeId("MENU0000000000000003", menu.getTreeId())),
-            menu);
-
-        assertNotNull(menuItemRepository.findOneByMenuIdxAndTreeId(
-            "MENU0000000000000003", menu.getRootParentId()));
     }
 }

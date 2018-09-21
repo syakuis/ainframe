@@ -1,17 +1,19 @@
 package org.ainframe.context;
 
-import java.util.List;
-import java.util.Objects;
-
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import org.ainframe.web.menu.model.Menu;
+import org.ainframe.web.menu.model.MenuNode;
+import org.ainframe.web.menu.model.MenuTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -28,25 +30,25 @@ public class MenuContext {
         this.menuContextService = menuContextService;
     }
 
-    public MenuDetails getMenuDetails(String menuIdx) {
-        return menuContextService.getMenuDetails(menuIdx);
+    public Menu getMenu(String menuIdx) {
+        return menuContextService.getMenu(menuIdx);
     }
 
-    public List<Menu> getMenus(String menuIdx) {
-        return this.getMenuDetails(menuIdx).getMenus();
+    public List<MenuNode> getMenuNodes(String menuIdx) {
+        return this.getMenu(menuIdx).getMenuNodes();
     }
 
     public List<MenuTree> getMenuTree(String menuIdx) {
-        return this.getMenuDetails(menuIdx).getMenuTrees();
+        return this.getMenu(menuIdx).getMenuTrees();
     }
 
     /**
      * 현재 요청한 경로(Request path)에 맞는 메뉴를 찾아 반환한다.
      */
-    public Menu getCurrentMenu(final String defaultUrlPattern, final String menuIdx, final String path) {
-        return Iterables.find(Lists.reverse(this.getMenus(menuIdx)), new Predicate<Menu>() {
+    public MenuNode getCurrentMenu(final String defaultUrlPattern, final String menuIdx, final String path) {
+        return Iterables.find(Lists.reverse(this.getMenuNodes(menuIdx)), new Predicate<MenuNode>() {
             @Override
-            public boolean apply(Menu input) {
+            public boolean apply(MenuNode input) {
                 return input.getUrl() != null
                     && pathMatcher.match(input.getUrl() + defaultUrlPattern, path);
             }

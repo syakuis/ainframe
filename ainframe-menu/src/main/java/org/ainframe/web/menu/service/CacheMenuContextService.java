@@ -1,7 +1,7 @@
 package org.ainframe.web.menu.service;
 
 import org.ainframe.context.MenuContextService;
-import org.ainframe.context.MenuDetails;
+import org.ainframe.web.menu.model.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
@@ -24,13 +24,13 @@ public class CacheMenuContextService implements MenuContextService {
         this.webMenuContextService = webMenuContextService;
     }
 
-    @Cacheable(key = "'menuDetails_' + #menuIdx")
+    @Cacheable(key = "#menuIdx")
     @Override
-    public MenuDetails getMenuDetails(String menuIdx) {
-        return webMenuContextService.getMenuDetails(menuIdx);
+    public Menu getMenu(String menuIdx) {
+        return webMenuContextService.getMenu(menuIdx);
     }
 
-    @CacheEvict(key = "'menuDetails_' + #menuIdx")
+    @CacheEvict(key = "#menuIdx")
     public void clear(String menuIdx) {
     }
 }

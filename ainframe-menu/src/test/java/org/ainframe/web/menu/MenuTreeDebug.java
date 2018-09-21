@@ -1,10 +1,10 @@
 package org.ainframe.web.menu;
 
-import java.util.List;
-
-import org.ainframe.context.MenuTree;
 import org.ainframe.core.util.Label;
+import org.ainframe.web.menu.model.MenuTree;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
