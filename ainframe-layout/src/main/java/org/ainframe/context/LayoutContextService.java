@@ -1,6 +1,6 @@
 package org.ainframe.context;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -8,5 +8,10 @@ import java.util.List;
  */
 public interface LayoutContextService {
     Layout getLayout(String layoutIdx);
-    List<Layout> getLayouts();
+
+    /**
+     * 전체 레이아웃중 번호화 이름만 얻기 위함
+     * @return Map
+     */
+    Map<String, String> getAllLayoutName();
 }

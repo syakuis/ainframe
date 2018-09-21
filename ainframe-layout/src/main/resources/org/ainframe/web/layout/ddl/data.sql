@@ -1,0 +1,4 @@
+CREATE SEQUENCE LAYOUT_IDX_SEQ;
+
+insert into "LAYOUT" ("LAYOUT", "TITLE", "HEAD_SCRIPT", "REG_DATE", "LAYOUT_IDX", "MENU_IDX") values ('admin', '관리자 레이아웃', null, SYSDATE, 'LAOUT0000000000ADMIN', 'MENU00000000000ADMIN');
+insert into "LAYOUT" ("LAYOUT", "TITLE", "HEAD_SCRIPT", "REG_DATE", "LAYOUT_IDX", "MENU_IDX") values ('default', '기본 레이아웃', null, SYSDATE, 'LAOUT00000000DEFAULT', null);

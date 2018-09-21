@@ -1,10 +1,10 @@
 package org.ainframe.context;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -20,8 +20,8 @@ public class LayoutContext {
         this.layoutContextService = layoutContextService;
     }
 
-    public List<Layout> getLayouts() {
-        return this.layoutContextService.getLayouts();
+    public Map<String, String> getAllLayoutName() {
+        return this.layoutContextService.getAllLayoutName();
     }
 
     public Layout getLayout(String layoutIdx) {

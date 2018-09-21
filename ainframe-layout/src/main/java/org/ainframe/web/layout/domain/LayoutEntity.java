@@ -1,13 +1,11 @@
 package org.ainframe.web.layout.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.persistence.*;
-
+import lombok.*;
+import org.ainframe.context.Layout;
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.*;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -20,7 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LayoutEntity implements Serializable {
+public class LayoutEntity implements Layout {
     @Column(name = "LAYOUT_IDX", nullable = false, length = 20)
     @Id
     @SequenceGenerator(
@@ -42,7 +40,7 @@ public class LayoutEntity implements Serializable {
         }
     )
     private String layoutIdx;
-    @Column(name = "MENU_IDX", nullable = false)
+    @Column(name = "MENU_IDX")
     private String menuIdx;
     @Column(name = "LAYOUT", nullable = false)
     private String layoutName;

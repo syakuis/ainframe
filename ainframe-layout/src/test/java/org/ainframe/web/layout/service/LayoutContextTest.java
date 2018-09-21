@@ -24,6 +24,6 @@ public class LayoutContextTest {
 
     @Test
     public void test() {
-        assertNotNull(contextService.getLayouts());
+        assertNotNull(contextService.getAllLayoutName());
     }
 }
