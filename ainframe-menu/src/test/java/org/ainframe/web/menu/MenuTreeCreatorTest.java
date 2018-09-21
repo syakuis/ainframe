@@ -37,12 +37,12 @@ public class MenuTreeCreatorTest {
     /**
      * 디버그 전용이다. menu mapping 정보를 출력한다.
      */
-    public void displayMapping(Map mapping) {
-        Iterator<String> keys = mapping.keySet().iterator();
+    public void displayMapping(Map<String, Integer> mapping) {
+        Iterator<Map.Entry<String, Integer>> iterator = mapping.entrySet().iterator();
         Label label = new Label().title("MENU TREE MAPPING");
-        while (keys.hasNext()) {
-            String key = keys.next();
-            label.first(key).add("=").add(mapping.get(key));
+        while (iterator.hasNext()) {
+            Map.Entry<String, Integer> map = iterator.next();
+            label.first(map.getKey()).add("=").add(map.getValue());
         }
         label.debug();
     }

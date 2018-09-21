@@ -17,7 +17,7 @@ import org.hibernate.type.Type;
 
 public class StringSequenceIdentifier implements IdentifierGenerator, Configurable {
 
-    private final String SEQUENCE_PREFIX = "sequence_prefix";
+    private static final String SEQUENCE_PREFIX = "sequence_prefix";
 
     private String sequencePrefix;
 

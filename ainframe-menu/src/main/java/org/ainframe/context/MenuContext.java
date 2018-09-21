@@ -13,6 +13,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -28,6 +29,14 @@ public class MenuContext {
     @Qualifier("cacheMenuContextService")
     public void setMenuContextService(MenuContextService menuContextService) {
         this.menuContextService = menuContextService;
+    }
+
+    /**
+     * 모든 메뉴를 menuIdx, menuName 가져와 반환한다.
+     * @return Map
+     */
+    public Map<String, String> getAllMenuName() {
+        return menuContextService.getAllMenuName();
     }
 
     public Menu getMenu(String menuIdx) {
@@ -58,7 +67,7 @@ public class MenuContext {
     /**
      * treeId 의 메뉴를 포함하여 그 아래 모든 자식 메뉴들까지 반환한다.
      * @param menuIdx 메뉴번호
-     * @param treeId 메뉴id
+     * @param treeId 메뉴 id
      * @return MenuTree
      */
     public MenuTree getMenuTreeByTreeId(final String menuIdx, final String treeId) {

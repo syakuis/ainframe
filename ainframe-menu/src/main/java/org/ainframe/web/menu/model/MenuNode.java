@@ -1,8 +1,8 @@
 package org.ainframe.web.menu.model;
 
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 9. 13.
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Data
 @Setter(AccessLevel.NONE)
 public class MenuNode implements Serializable {

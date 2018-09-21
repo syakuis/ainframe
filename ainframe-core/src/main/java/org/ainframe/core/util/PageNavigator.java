@@ -78,7 +78,7 @@ public class PageNavigator {
         navigator.startPage = (int) Math.ceil(((page - 1) / pageLink) * pageLink + 1);
         navigator.endPage = navigator.startPage + pageLink - 1;
 
-        navigator.virtualIdx = navigator.totalCount - (pageRow * (page - 1));
+        navigator.virtualIdx = navigator.totalCount - (long) (pageRow * (page - 1));
         // oracle start rowNum = 0
         //virtualIdx = virtualIdx + 1;
 

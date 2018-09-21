@@ -1,5 +1,7 @@
 package org.ainframe.web.menu.service;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Maps;
 import org.ainframe.context.MenuContextService;
 import org.ainframe.web.menu.config.MenuProperties;
 import org.ainframe.web.menu.domain.MenuNodeEntity;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -36,6 +39,23 @@ public class WebMenuContextService implements MenuContextService {
     }
 
     @Override
+    public Map<String, String> getAllMenuName() {
+        List<MenuTreeEntity> menuTreeEntities = menuService.getMenuTrees();
+
+        return Maps.newHashMap(Maps.transformValues(Maps.uniqueIndex(menuTreeEntities, new Function<MenuTreeEntity, String>() {
+            @Override
+            public String apply(MenuTreeEntity input) {
+                return input.getMenuIdx();
+            }
+        }), new Function<MenuTreeEntity, String>() {
+            @Override
+            public String apply(MenuTreeEntity input) {
+                return input.getMenuName();
+            }
+        }));
+    }
+
+    @Override
     public Menu getMenu(String menuIdx) {
         MenuTreeEntity menuTreeEntity = menuService.getMenuTreeByMenuIdx(menuIdx);
 
@@ -43,11 +63,10 @@ public class WebMenuContextService implements MenuContextService {
         Collections.sort(menuNodeEntities);
         List<MenuNode> menuNodes = MenuNodeUtils.toMenus(menuNodeEntities);
 
-        return Menu.builder()
-            .menuIdx(menuTreeEntity.getMenuIdx())
-            .menuName(menuTreeEntity.getMenuName())
-            .menuNodes(menuNodes)
-            .menuTrees(new MenuTreeCreator(menuNodes, menuProperties.getRootMenuId()).getMenuTrees())
-            .build();
+        return new Menu(
+            menuTreeEntity.getMenuIdx(),
+            menuTreeEntity.getMenuName(),
+            menuNodes,
+            new MenuTreeCreator(menuNodes, menuProperties.getRootMenuId()).getMenuTrees());
     }
 }

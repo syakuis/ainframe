@@ -14,6 +14,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -48,5 +52,17 @@ public class MenuContextTest {
         MenuTree menuTree = menuContext
             .getMenuTreeByTreeId("MENU0000000000000003", menuNode.getRootParentId());
         new MenuTreeDebug().displayMenuTree(Lists.newArrayList(menuTree), "MENU0000000000000003");
+    }
+
+    @Test
+    public void 모든메뉴이름가져오기() {
+        Map<String, String> menuNames = menuContext.getAllMenuName();
+        Iterator<Map.Entry<String, String>> iterator = menuNames.entrySet().iterator();
+
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> menuName = iterator.next();
+
+            log.debug("{} : {}", menuName.getKey(), menuName.getValue());
+        }
     }
 }

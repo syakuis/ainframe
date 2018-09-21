@@ -22,7 +22,7 @@ public class MenuService {
         this.menuTreeRepository = menuTreeRepository;
     }
 
-    public List<MenuTreeEntity> getMenus() {
+    public List<MenuTreeEntity> getMenuTrees() {
         return menuTreeRepository.findAll();
     }
 

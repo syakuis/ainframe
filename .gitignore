@@ -3,4 +3,5 @@
 *.iws
 /.gradle
 build/
+out/
 **/application-real.properties
