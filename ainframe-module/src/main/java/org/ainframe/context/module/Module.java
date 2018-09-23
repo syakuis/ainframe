@@ -1,20 +1,20 @@
-package org.ainframe.context;
-
-import java.io.Serializable;
-import java.util.Map;
+package org.ainframe.context.module;
 
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.util.Map;
+
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 8. 29.
  */
-@Builder
 @Data
 @Setter(AccessLevel.NONE)
+@Builder
 public class Module implements Serializable {
     private String moduleIdx;
     private String moduleId;

@@ -1,7 +1,7 @@
 package org.ainframe.web.menu.config;
 
 import lombok.Data;
-import org.ainframe.core.module.ModuleProperties;
+import org.ainframe.core.module.ModuleProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -18,7 +18,7 @@ import javax.validation.constraints.NotNull;
 @ConfigurationProperties(prefix = "ainframe.web.menu")
 @Validated
 @Data
-public class MenuProperties implements ModuleProperties {
+public class MenuProperties implements ModuleProperty {
     @NotNull
     private String moduleName;
     @NotNull

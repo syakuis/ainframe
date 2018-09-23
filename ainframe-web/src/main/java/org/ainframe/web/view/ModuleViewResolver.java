@@ -3,8 +3,8 @@ package org.ainframe.web.view;
 import java.util.Objects;
 
 import org.ainframe.context.ConfigContext;
-import org.ainframe.context.ModuleContext;
-import org.ainframe.context.Module;
+import org.ainframe.context.module.ModuleContext;
+import org.ainframe.context.module.Module;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

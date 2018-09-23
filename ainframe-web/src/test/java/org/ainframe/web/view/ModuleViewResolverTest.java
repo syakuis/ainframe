@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.Objects;
 
 import org.ainframe.context.ConfigContext;
-import org.ainframe.context.ModuleContext;
+import org.ainframe.context.module.ModuleContext;
 import org.ainframe.web.config.model.Config;
-import org.ainframe.context.Module;
+import org.ainframe.context.module.Module;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

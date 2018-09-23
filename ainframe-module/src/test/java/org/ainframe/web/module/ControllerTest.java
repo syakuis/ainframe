@@ -1,9 +1,5 @@
 package org.ainframe.web.module;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,13 +12,17 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 8. 27.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("real")
+@ActiveProfiles("test")
 @EnableAutoConfiguration
 public class ControllerTest {
     private MockMvc mockMvc;

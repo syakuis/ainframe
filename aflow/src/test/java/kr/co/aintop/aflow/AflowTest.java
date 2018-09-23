@@ -1,7 +1,7 @@
 package kr.co.aintop.aflow;
 
-import org.ainframe.context.ModuleContext;
-import org.ainframe.context.Module;
+import org.ainframe.context.module.ModuleContext;
+import org.ainframe.context.module.Module;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

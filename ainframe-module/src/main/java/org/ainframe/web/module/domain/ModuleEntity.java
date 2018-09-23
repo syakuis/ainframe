@@ -1,18 +1,5 @@
 package org.ainframe.web.module.domain;
 
-import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.persistence.*;
-
-import org.ainframe.context.Module;
-import org.ainframe.context.ModuleOption;
-import org.ainframe.core.data.enums.YesOrNo;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.hibernate.annotations.GenericGenerator;
-
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -20,6 +7,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.ainframe.context.module.Module;
+import org.ainframe.context.module.ModuleOption;
+import org.ainframe.core.data.enums.YesOrNo;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * todo 테이블 필드명 새롭게 정리하기.
@@ -100,7 +98,7 @@ public class ModuleEntity implements Serializable {
      * @return Module
      */
     public static Module transform(ModuleEntity moduleEntity) {
-        Map<String, ModuleOption> moduleOptions = Maps.transformValues(
+        Map<String, ModuleOption> moduleOptions = Maps.newHashMap(Maps.transformValues(
             Maps.uniqueIndex(
                 moduleEntity.getModuleOptionEntities(),
                 new Function<ModuleOptionEntity, String>() {
@@ -117,7 +115,7 @@ public class ModuleEntity implements Serializable {
                         .value(entity.getValue())
                         .title(entity.getTitle()).build();
                 }
-            });
+            }));
 
         return Module.builder()
             .moduleIdx(moduleEntity.getModuleIdx())

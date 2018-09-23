@@ -1,17 +1,16 @@
 package org.ainframe.web.module;
 
-import javax.transaction.Transactional;
-
 import org.ainframe.web.module.service.ModuleService;
 import org.ainframe.web.module.service.ViewModuleService;
 import org.ainframe.web.module.service.model.ModuleSearch;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.transaction.Transactional;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -19,10 +18,9 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("real")
-@EnableAutoConfiguration
+@ActiveProfiles("test")
 @Transactional
-public class ModuleServiceRealTest {
+public class ModuleServiceTest {
 
     @Autowired
     private ModuleService moduleService;

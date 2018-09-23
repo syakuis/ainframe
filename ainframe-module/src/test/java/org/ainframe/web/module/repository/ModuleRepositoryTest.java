@@ -1,14 +1,6 @@
 package org.ainframe.web.module.repository;
 
-import static org.junit.Assert.*;
-
-import java.util.Collections;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
+import lombok.extern.slf4j.Slf4j;
 import org.ainframe.web.module.domain.ModuleEntity;
 import org.ainframe.web.module.domain.ModuleOptionEntity;
 import org.junit.Test;
@@ -18,7 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import lombok.extern.slf4j.Slf4j;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+import java.util.Collections;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -55,8 +53,8 @@ public class ModuleRepositoryTest {
             .moduleId("test")
             .moduleName("test")
             .moduleOptionEntities(ModuleEntity.createModuleOptionEntities(
-                new ModuleOptionEntity("op1", "op1"),
-                new ModuleOptionEntity("op2", "op2")
+                ModuleOptionEntity.builder().name("op1").value("op1").build(),
+                ModuleOptionEntity.builder().name("op2").value("op2").build()
             )).build();
         moduleRepository.save(moduleEntity);
 

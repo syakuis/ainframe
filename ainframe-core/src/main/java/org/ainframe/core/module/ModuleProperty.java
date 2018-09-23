@@ -4,7 +4,7 @@ package org.ainframe.core.module;
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 8. 30.
  */
-public interface ModuleProperties {
+public interface ModuleProperty {
     String getModuleName();
 
     /**

@@ -1,5 +1,6 @@
 dependencies {
     compile project(':ainframe-core')
+    compile project(':ainframe-cache')
     compile project(':ainframe-data-jpa')
     compile project(':ainframe-config')
     testCompile project(':ainframe-test')

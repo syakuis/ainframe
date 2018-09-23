@@ -1,11 +1,11 @@
-package org.ainframe.context;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+package org.ainframe.context.module;
 
 import com.google.common.base.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -16,20 +16,25 @@ public final class ModuleContext {
     private ModuleContextService moduleContextService;
 
     @Autowired
+    @Qualifier("cacheModuleContextService")
     public void setModuleContextService(ModuleContextService moduleContextService) {
         this.moduleContextService = moduleContextService;
     }
 
+    private ModuleStore store() {
+        return this.moduleContextService.getModuleStore();
+    }
+
     public List<Module> getModules() {
-        return this.moduleContextService.getModules();
+        return this.store().values();
     }
 
     public Module getModule(String moduleId) {
-        return this.moduleContextService.getModule(moduleId);
+        return this.store().getModule(moduleId);
     }
 
     public Module getModuleByModuleIdx(String moduleIdx) {
-        return this.moduleContextService.getModuleByModuleIdx(moduleIdx);
+        return this.store().getModuleByModuleIdx(moduleIdx);
     }
 
     /**
@@ -39,7 +44,7 @@ public final class ModuleContext {
      * @see ModuleContext#getModule(String)
      */
     public String getModuleIdxByModuleId(String moduleId) {
-        return Optional.fromNullable(this.getModule(moduleId).getModuleIdx()).orNull();
+        return Optional.fromNullable(this.store().getModuleIdx(moduleId)).orNull();
     }
 
     /**
@@ -49,7 +54,7 @@ public final class ModuleContext {
      * @see ModuleContext#getModuleByModuleIdx(String)
      */
     public String getModuleIdByModuleIdx(String moduleIdx) {
-        return Optional.fromNullable(this.getModuleByModuleIdx(moduleIdx).getModuleIdx()).orNull();
+        return Optional.fromNullable(this.store().getModuleId(moduleIdx)).orNull();
     }
 
     /**
@@ -59,7 +64,7 @@ public final class ModuleContext {
      * @see ModuleContext#getModule(String)
      */
     public String getModuleNameByModuleId(String moduleId) {
-        return Optional.fromNullable(this.getModule(moduleId).getModuleName()).orNull();
+        return Optional.fromNullable(this.store().getModuleNameByModuleId(moduleId)).orNull();
     }
 
     /**
@@ -69,6 +74,6 @@ public final class ModuleContext {
      * @see ModuleContext#getModuleByModuleIdx(String)
      */
     public String getModuleNameByModuleIdx(String moduleIdx) {
-        return Optional.fromNullable(this.getModuleByModuleIdx(moduleIdx).getModuleName()).orNull();
+        return Optional.fromNullable(this.store().getModuleNameByModuleIdx(moduleIdx)).orNull();
     }
 }
