@@ -46,6 +46,11 @@ public class LayoutEntity implements Layout {
     private String layoutName;
     @Column(name = "TITLE", nullable = false)
     private String title;
+    /**
+     * 기본적으로 layout.ftl 을 사용하지만 원한다면 변경할 수 있다. 템플릿을 다르게 하면서 자원은 공유할 수 있다.
+     */
+    @Column(name = "LAYOUT_TEMPLATE")
+    private String layoutTemplate;
     @Column(name = "HEAD_SCRIPT")
     private String headScript;
     @Column(name = "REG_DATE")

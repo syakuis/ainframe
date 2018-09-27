@@ -1,10 +1,10 @@
 package org.ainframe.autoconfigure;
 
-import org.ainframe.core.util.Label;
+import lombok.extern.slf4j.Slf4j;
+import org.ainframe.web.banner.Banner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -14,9 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @ComponentScan("org.ainframe")
 public class WebAutoConfiguration {
-    public WebAutoConfiguration() {
-        if (log.isDebugEnabled()) {
-            new Label().title("CONTEXT AUTO CONFIGURATION").debug();
-        }
+    @Bean
+    public Banner banner() {
+        return new Banner();
     }
 }

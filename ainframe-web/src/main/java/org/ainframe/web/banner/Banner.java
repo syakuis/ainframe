@@ -17,7 +17,7 @@ public class Banner {
         print();
     }
 
-    public void print() {
+    private Banner print() {
         StringBuilder print = new StringBuilder();
         print.append("\n_________________________________________________________________________________\n");
 
@@ -45,5 +45,7 @@ public class Banner {
             .append("_________________________________________________________________________________\n\n");
 
         System.out.println(print.toString());
+
+        return this;
     }
 }

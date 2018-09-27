@@ -10,4 +10,5 @@ public interface Layout extends Serializable {
     String getLayoutIdx();
     String getMenuIdx();
     String getLayoutName();
+    String getLayoutTemplate();
 }

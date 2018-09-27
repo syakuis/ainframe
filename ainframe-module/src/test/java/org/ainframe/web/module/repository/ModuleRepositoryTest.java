@@ -44,7 +44,7 @@ public class ModuleRepositoryTest {
         assertEquals(moduleEntity, aModuleEntity);
         entityManager.flush();
         List<ModuleEntity> moduleEntities = moduleRepository.findAll();
-        assertTrue(moduleEntities.size() == 1);
+        assertTrue(moduleEntities.size()>= 1);
     }
 
     @Test

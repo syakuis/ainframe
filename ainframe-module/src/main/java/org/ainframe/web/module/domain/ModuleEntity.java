@@ -124,7 +124,9 @@ public class ModuleEntity implements Serializable {
             .skin(moduleEntity.getSkin())
             .onlyUseTheme(moduleEntity.getOnlyUseTheme().isValue())
             .browserTitle(moduleEntity.getBrowserTitle())
-            .moduleOptions(moduleOptions).build();
+            .moduleOptions(moduleOptions)
+            .layoutIdx(moduleEntity.getLayoutIdx())
+            .build();
     }
 
     @Override

@@ -1,13 +1,12 @@
 package org.ainframe.web.config.domain;
 
-import javax.persistence.*;
-
+import lombok.*;
 import org.ainframe.core.data.enums.YesOrNo;
 import org.ainframe.web.config.model.Config;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.*;
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -20,7 +19,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ConfigEntity implements Config {
+public class ConfigEntity implements Serializable {
     @SequenceGenerator(
         name = "CONFIG_IDX_GEN",
         sequenceName = "CONFIG_IDX_SEQ",
@@ -45,12 +44,12 @@ public class ConfigEntity implements Config {
     @Column(name = "MODULE_IDX")
     private String moduleIdx;
     @Column(name = "TITLE")
-    private String title;
+    private String browserTitle;
     @Enumerated(EnumType.STRING)
     @Column(name = "TITLE_OVERWRITE")
     private YesOrNo titleOverwrite;
     @Column(name = "INDEX_PAGE")
-    private String indexPage;
+    private String indexUrl;
     @Column(name = "LAYOUT_IDX")
     private String layoutIdx;
     @Column(name = "BASIC_SKIN")
@@ -60,8 +59,15 @@ public class ConfigEntity implements Config {
     @Column(name = "STYLE_THEME")
     private String styleTheme;
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+    public static Config transfer(ConfigEntity configEntity) {
+        return Config.builder()
+            .basicSkin(configEntity.getBasicSkin())
+            .skin(configEntity.getSkin())
+            .browserTitle(configEntity.getBrowserTitle())
+            .browserTitleOverwrite(configEntity.getTitleOverwrite().isValue())
+            .indexUrl(configEntity.getIndexUrl())
+            .layoutIdx(configEntity.getLayoutIdx())
+            .styleTheme(configEntity.getStyleTheme())
+            .build();
     }
 }

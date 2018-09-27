@@ -26,4 +26,5 @@ public class Module implements Serializable {
     private boolean onlyUseTheme;
     private String browserTitle;
     private Map<String, ModuleOption> moduleOptions;
+    private String layoutIdx;
 }

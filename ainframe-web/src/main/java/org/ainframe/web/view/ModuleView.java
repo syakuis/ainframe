@@ -1,27 +1,29 @@
 package org.ainframe.web.view;
 
-import org.ainframe.context.module.Module;
-
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
- * @since 2018. 8. 28.
+ * @since 2018. 9. 27.
  */
 public interface ModuleView {
-    Module getModule();
-    /**
-     * @return moduleName
-     */
-    String getModuleName();
-    String getModuleId();
-    String getModuleIdx();
-    String getSkin();
+    void changeBrowserTitle(String browserTitle);
+
+    void changeBrowserTitle(String browserTitle, boolean must);
+
+    void changeTemplate(String template);
+
+    void changeSkin(String skin);
+
+    void changeSkinAndTemplate(String skin, String template);
+
+    org.ainframe.context.module.Module getModule();
+
+    org.ainframe.context.module.Module getParentModule();
+
+    String getModulePath();
+
     String getBrowserTitle();
 
-    /**
-     * @return 대상 모듈의 상대 경로
-     */
-    String getModulePath();
-    String getTemplate();
     String getTemplatePath();
+
     String getTemplateFile();
 }

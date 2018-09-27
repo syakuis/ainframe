@@ -3,7 +3,5 @@ dependencies {
     compile project(':ainframe-data-jpa')
     compile project(':ainframe-cache')
     testCompile project(':ainframe-test')
-
-    compile 'org.modelmapper:modelmapper:2.1.1'
     testCompile 'com.h2database:h2'
 }

@@ -1,5 +1,8 @@
 dependencies {
+    compile project(':ainframe-menu')
     compile project(':ainframe-layout')
+    compile project(':ainframe-config')
     compile project(':ainframe-module')
+    testCompile project(':ainframe-test')
     testCompile 'com.h2database:h2'
 }

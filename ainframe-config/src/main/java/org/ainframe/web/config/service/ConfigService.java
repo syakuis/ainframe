@@ -1,6 +1,7 @@
 package org.ainframe.web.config.service;
 
 import org.ainframe.web.config.config.ConfigProperties;
+import org.ainframe.web.config.domain.ConfigEntity;
 import org.ainframe.web.config.model.Config;
 import org.ainframe.web.config.repository.ConfigRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,6 @@ public class ConfigService {
     }
 
     public Config getConfig() {
-        return this.configRepository.findOneByModuleIdx(configProperties.getModuleIdx());
+        return ConfigEntity.transfer(this.configRepository.findOneByModuleIdx(configProperties.getModuleIdx()));
     }
 }
