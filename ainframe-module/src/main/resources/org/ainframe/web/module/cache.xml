@@ -1,0 +1,8 @@
+<caches>
+    <cache name="moduleContext"
+           maxEntriesLocalHeap="10000"
+           eternal="true"
+           memoryStoreEvictionPolicy="LFU">
+        <persistence strategy="localTempSwap" />
+    </cache>
+</caches>
