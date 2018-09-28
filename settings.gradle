@@ -7,7 +7,7 @@ include 'ainframe-menu'
 include 'ainframe-config'
 include 'ainframe-module'
 include 'ainframe-web'
-include 'aflow'
 include 'ainframe-test'
 include 'ainframe-layout'
+include 'ainframe-exemple'
 

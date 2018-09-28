@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurer;
@@ -26,6 +27,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 @ConditionalOnClass(name = "net.sf.ehcache.CacheManager")
+@ConditionalOnProperty(name="ainframe.cache.ehcache.enable", havingValue="true")
 @EnableConfigurationProperties(EhCacheProperties.class)
 @EnableCaching
 public class EhCacheAutoConfiguration implements CachingConfigurer {

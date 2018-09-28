@@ -1,0 +1,5 @@
+dependencies {
+    compile project(':ainframe-web')
+    testCompile project(':ainframe-test')
+    testCompile 'com.h2database:h2'
+}
