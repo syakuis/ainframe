@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 /**
+ * todo https://gitlab.com/syakuis/ainframe/issues/16
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 9. 27.
  */
@@ -38,7 +39,7 @@ public class LayoutViewRender implements LayoutView {
     private String layoutFile;
 
     public LayoutViewRender(LayoutContext layoutContext, MenuContext menuContext, String layoutIdx) {
-        Assert.notNull(layoutIdx, "layoutIdx must be not null.");
+        Assert.notNull(layoutIdx, "layoutIdx must not be null.");
 
         this.layout = layoutContext.getLayout(layoutIdx);
 
@@ -68,15 +69,24 @@ public class LayoutViewRender implements LayoutView {
 
     @Override
     public void changeLayoutAndTemplate(String layoutName, String layoutTemplate) {
-        if (layout == null || layoutTemplate == null) {
-            log.debug("layout 혹은 layoutTemplate 은 null 일 수 없다.");
-            return;
-        }
-
-        String layoutPath = "/layouts/" + layoutName;
-        this.layoutFile = layoutPath + "/" + layoutTemplate;
-        this.layoutPath = layoutPath;
+        this.layoutPath = createLayoutPath(layoutName);
+        this.layoutFile = createLayoutFile(layoutPath, layoutTemplate);
         this.layoutTemplate = layoutTemplate;
         this.layoutName = layoutName;
+    }
+
+    public static String createLayoutPath(String layoutName) {
+        if (StringUtils.isEmpty(layoutName)) {
+            throw new IllegalArgumentException("layoutName must not be null.");
+        }
+
+        return "/layouts/" + layoutName;
+    }
+
+    public static String createLayoutFile(String layoutPath, String layoutTemplate) {
+        if (StringUtils.isEmpty(layoutTemplate)) {
+            throw new IllegalArgumentException("layoutTemplate must not be null.");
+        }
+        return layoutPath + "/" + layoutTemplate;
     }
 }

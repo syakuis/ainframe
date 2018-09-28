@@ -26,6 +26,16 @@ public class WebViewResolver {
     }
 
     @Autowired
+    public void setMenuContext(MenuContext menuContext) {
+        this.menuContext = menuContext;
+    }
+
+    @Autowired
+    public void setLayoutContext(LayoutContext layoutContext) {
+        this.layoutContext = layoutContext;
+    }
+
+    @Autowired
     public void setModuleContext(ModuleContext moduleContext) {
         this.moduleContext = moduleContext;
     }
@@ -35,15 +45,9 @@ public class WebViewResolver {
         this.configContext = configContext;
     }
 
-    @Autowired
-    public void setLayoutContext(LayoutContext layoutContext) {
-        this.layoutContext = layoutContext;
-    }
 
-    @Autowired
-    public void setMenuContext(MenuContext menuContext) {
-        this.menuContext = menuContext;
-    }
+
+
 
     /**
      * ModuleViewRender 를 인스턴스한다.

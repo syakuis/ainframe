@@ -1,5 +1,6 @@
 package org.ainframe.cache.autoconfigure;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ainframe.cache.bean.factory.MultipleEhCacheManagerFactoryBean;
 import org.ainframe.core.util.Label;
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +18,6 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.cache.interceptor.SimpleKeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

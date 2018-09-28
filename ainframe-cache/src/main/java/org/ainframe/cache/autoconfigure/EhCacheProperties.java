@@ -1,9 +1,8 @@
 package org.ainframe.cache.autoconfigure;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

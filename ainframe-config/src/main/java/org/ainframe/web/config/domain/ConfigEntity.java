@@ -48,12 +48,18 @@ public class ConfigEntity implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "TITLE_OVERWRITE")
     private YesOrNo titleOverwrite;
-    @Column(name = "INDEX_PAGE")
+    @Column(name = "INDEX_PAGE", nullable = false)
     private String indexUrl;
-    @Column(name = "LAYOUT_IDX")
+    @Column(name = "LAYOUT_IDX", nullable = false)
     private String layoutIdx;
+    /**
+     * 기본 스킨
+     */
     @Column(name = "BASIC_SKIN")
     private String basicSkin;
+    /**
+     * 모듈 테마 사용시 사용될 스킨
+     */
     @Column(name = "SKIN")
     private String skin;
     @Column(name = "STYLE_THEME")

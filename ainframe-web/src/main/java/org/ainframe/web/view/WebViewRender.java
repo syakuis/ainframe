@@ -1,5 +1,6 @@
 package org.ainframe.web.view;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +22,7 @@ import java.util.Map;
  * @since 2018. 9. 24.
  */
 @Slf4j
+@EqualsAndHashCode
 public class WebViewRender implements ModuleView, LayoutView {
     private final ModuleView moduleView;
     private final LayoutView layoutView;
@@ -41,11 +43,15 @@ public class WebViewRender implements ModuleView, LayoutView {
         ModuleViewRender moduleViewRender = new ModuleViewRender(webProperties, moduleContext, configContext, moduleId);
         moduleViewRender.render(template);
 
-        LayoutViewRender layoutViewRender = new LayoutViewRender(
+        String layoutIdx = moduleViewRender.getDefaultLayoutIdx(template);
+        if (layoutIdx != null) {
+            this.layoutView = new LayoutViewRender(
             layoutContext, menuContext, moduleViewRender.getDefaultLayoutIdx(template));
+        } else {
+            this.layoutView = null;
+        }
 
         this.moduleView = moduleViewRender;
-        this.layoutView = layoutViewRender;
         this.modelAndView = new ModelAndView(webProperties.getIndexTemplate());
     }
 
@@ -125,7 +131,9 @@ public class WebViewRender implements ModuleView, LayoutView {
 
     @Override
     public void changeLayoutAndTemplate(String layoutName, String layoutTemplate) {
-        this.layoutView.changeLayoutAndTemplate(layoutName, layoutTemplate);
+        if (this.layoutView != null) {
+            this.layoutView.changeLayoutAndTemplate(layoutName, layoutTemplate);
+        }
     }
 
     @Override
@@ -168,17 +176,17 @@ public class WebViewRender implements ModuleView, LayoutView {
 
     @Override
     public String toString() {
-        Module module = this.getModule();
-        return new StringBuilder("\r\n{> ModuleViewResolver <}===============================================\r\n")
-                    .append("> modulePath : ").append(this.getModulePath()).append("\r\n")
-                    .append("> layoutPath : ").append(this.getLayoutPath()).append("\r\n")
-                    .append("> layoutFile : ").append(this.getLayoutFile()).append("\r\n")
-                    .append("> templateFile : ").append(this.getTemplateFile()).append("\r\n")
-                    .append("> browserTitle : ").append(this.getBrowserTitle()).append("\r\n")
-                    .append("> onlyUseModule : ").append(this.onlyUseModule).append("\r\n")
-                    .append("> disableLayout : ").append(this.disableLayout).append("\r\n")
-                    .append("> disableMenu : ").append(this.disableMenu).append("\r\n")
-                    .append("==========================================================================\r\n")
-                    .toString();
+        return new StringBuilder("\r\n")
+            .append("> ModuleViewResolver ===============================================\r\n")
+            .append("> modulePath : ").append(this.getModulePath()).append("\r\n")
+            .append("> layoutPath : ").append(this.getLayoutPath()).append("\r\n")
+            .append("> layoutFile : ").append(this.getLayoutFile()).append("\r\n")
+            .append("> templateFile : ").append(this.getTemplateFile()).append("\r\n")
+            .append("> browserTitle : ").append(this.getBrowserTitle()).append("\r\n")
+            .append("> onlyUseModule : ").append(this.onlyUseModule).append("\r\n")
+            .append("> disableLayout : ").append(this.disableLayout).append("\r\n")
+            .append("> disableMenu : ").append(this.disableMenu).append("\r\n")
+            .append("==========================================================================\r\n")
+            .toString();
     }
 }

@@ -1,14 +1,13 @@
 package org.ainframe.web.config.config;
 
-import javax.validation.constraints.NotNull;
-
+import lombok.Data;
 import org.ainframe.core.module.ModuleProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.validation.annotation.Validated;
 
-import lombok.Data;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

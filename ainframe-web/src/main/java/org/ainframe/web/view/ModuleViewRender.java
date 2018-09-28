@@ -19,7 +19,6 @@ import java.util.Objects;
  */
 @Slf4j
 public class ModuleViewRender implements ModuleView {
-    private static final String SKIN = "tpl";
     private final String defaultAdminSkin;
     private final String defaultAdminLayoutIdx;
     private final String defaultSkin;
@@ -64,13 +63,13 @@ public class ModuleViewRender implements ModuleView {
         this.config = configContext.getConfig();
 
         if (this.config == null) {
-            throw new IllegalArgumentException("config object must be not null.");
+            throw new IllegalArgumentException("config object must not be null.");
         }
 
         this.module = moduleContext.getModule(moduleId);
 
         if (this.module == null) {
-            throw new IllegalArgumentException("module object must be not null.");
+            throw new IllegalArgumentException("module object must not be null.");
         }
 
         this.modulePath = WebViewUtils.getModulePath(this.module.getModuleName(), moduleId);
@@ -84,7 +83,7 @@ public class ModuleViewRender implements ModuleView {
 
     public void render(String template) {
         if (template == null || template.length() == 0) {
-            throw new IllegalArgumentException("template must be not null.");
+            throw new IllegalArgumentException("template must not be null.");
         }
 
         this.template = template;
@@ -93,7 +92,7 @@ public class ModuleViewRender implements ModuleView {
         this.changeBrowserTitle(module.getBrowserTitle());
 
         // 기본 스킨
-        this.changeSkinAndTemplate(this.getDefaultSkin(template), template);
+        this.defaultSkinAndTemplate();
     }
 
     /**
@@ -111,7 +110,7 @@ public class ModuleViewRender implements ModuleView {
             return StringUtils.defaultIfEmpty(config.getSkin(), config.getBasicSkin());
         }
 
-        return StringUtils.defaultIfEmpty(this.SKIN, this.defaultSkin);
+        return StringUtils.defaultIfEmpty(this.module.getSkin(), this.defaultSkin);
     }
 
     @Override
@@ -155,29 +154,19 @@ public class ModuleViewRender implements ModuleView {
     @Override
     public void changeSkinAndTemplate(String skin, String template) {
         if (skin == null || skin.length() == 0) {
-            throw new IllegalArgumentException("skin must be not null");
+            throw new IllegalArgumentException("skin must not be null");
         }
 
         if (template == null || template.length() == 0) {
-            throw new IllegalArgumentException("template must be not null.");
+            throw new IllegalArgumentException("template must not be null.");
         }
 
-        this.setTemplatePathAndTemplateFile();
+        this.skin = skin;
+        this.template = template;
 
-        if (!this.isTemplateFileExists(this.templateFile)) {
-            log.warn("스킨에 템플릿 파일이 존재하지 않습니다. : skin = {} : template = {}", skin, template);
-            this.changeSkinAndTemplate(this.config.getBasicSkin(), this.template);
-        } else {
-            this.skin = skin;
-            this.template = template;
-        }
+        this.templatePath = createTemplatePath(this.module.getModuleName(), this.skin);
+        this.templateFile = createTemplateFile(this.templatePath, this.template);
     }
-
-    private void setTemplatePathAndTemplateFile() {
-        this.templatePath = this.createTemplatePath(this.module.getModuleName(), this.skin);
-        this.templateFile = this.createTemplateFile(this.templatePath, this.template);
-    }
-
 
     /**
      * 모듈의 스킨 경로를 완성한다. 모듈과 스킨 값을 필수이고 템플릿은 선택사항이다.
@@ -185,7 +174,7 @@ public class ModuleViewRender implements ModuleView {
      * @param skin skin required
      * @return String
      */
-    private String createTemplatePath(String moduleName, String skin) {
+    public static String createTemplatePath(String moduleName, String skin) {
         if (StringUtils.isEmpty(moduleName) || StringUtils.isEmpty(skin)) {
             throw new IllegalArgumentException("경로를 조합하기 위한 인수가 올바르지 않다.");
         }
@@ -206,34 +195,47 @@ public class ModuleViewRender implements ModuleView {
         return new StringBuilder(path).append('/').append(template).toString();
     }
 
-
     /**
-     * 템플릿 경로에 실제 파일이 존재하는 지 판단한다.
-     * @param templateFile 상대 경로
+     * templateFile 존재여부 판단.
+     * @param templateFile 스킨 경로를 포함한 템플릿 파일
      * @return boolean
      */
-    private boolean isTemplateFileExists(String templateFile) {
+    public static boolean templateFileExists(String templateFile) {
         if (templateFile == null || templateFile.length() == 0) {
             throw new IllegalArgumentException("path 인자가 빈값이거나 널이다.");
         }
+
         return new File(PathUtils.getRootClassPath() + templateFile).exists();
     }
 
 
     /**
-     * 기본 레이아웃 idx
+     * 기본 스킨과 템플릿을 설정하고 실제 파일이 존재하지 않으면 기본 스킨과 템플릿을 설정한다.
+     */
+    private void defaultSkinAndTemplate() {
+        this.changeSkinAndTemplate(this.getDefaultSkin(template), template);
+
+        if (!templateFileExists(this.templateFile)) {
+            log.warn("스킨에 템플릿 파일이 존재하지 않습니다. 기본 설정으로 변경됨 : skin = {} : template = {}", skin, template);
+            this.changeSkinAndTemplate(this.config.getBasicSkin(), this.template);
+        }
+    }
+
+
+    /**
+     * 기본으로 사용될 layoutIdx 결정한다.
+     * admin 인 경우 defaultAdminLayoutIdx 사용하고 테마 사용인 경우 {@link Config} 에 설정된 layoutIdx 을 사용한다.
+     * 그외 모듈에 설정된 layoutIdx 사용한다.
      * @return layoutIdx
      */
     public String getDefaultLayoutIdx(String template) {
-        String layoutIdx = StringUtils.defaultIfEmpty(this.module.getLayoutIdx(), this.config.getLayoutIdx());
-
         // 관리자 여부에 따라 기본 스킨과 레이아웃이 변경됨.
         if (WebViewUtils.isAdminTemplate(template)) {
             return this.defaultAdminLayoutIdx;
         } else if (this.module.isOnlyUseTheme()) {
-            return StringUtils.defaultIfEmpty(this.config.getLayoutIdx(), layoutIdx);
+            return this.config.getLayoutIdx();
         }
 
-        return layoutIdx;
+        return StringUtils.defaultIfEmpty(this.module.getLayoutIdx(), this.config.getLayoutIdx());
     }
 }

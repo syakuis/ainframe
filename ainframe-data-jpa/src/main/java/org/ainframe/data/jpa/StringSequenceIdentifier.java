@@ -1,8 +1,5 @@
 package org.ainframe.data.jpa;
 
-import java.io.Serializable;
-import java.util.Properties;
-
 import org.hibernate.MappingException;
 import org.hibernate.Session;
 import org.hibernate.dialect.Dialect;
@@ -14,6 +11,9 @@ import org.hibernate.id.enhanced.SequenceStyleGenerator;
 import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.Type;
+
+import java.io.Serializable;
+import java.util.Properties;
 
 public class StringSequenceIdentifier implements IdentifierGenerator, Configurable {
 

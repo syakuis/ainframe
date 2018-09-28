@@ -1,9 +1,9 @@
 package org.ainframe.web.layout.repository;
 
-import java.util.List;
-
 import org.ainframe.web.layout.domain.LayoutEntity;
 import org.springframework.data.repository.Repository;
+
+import java.util.List;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

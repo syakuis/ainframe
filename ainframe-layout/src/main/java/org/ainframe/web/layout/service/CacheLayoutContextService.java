@@ -3,6 +3,7 @@ package org.ainframe.web.layout.service;
 import org.ainframe.context.Layout;
 import org.ainframe.context.LayoutContextService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,22 +21,23 @@ import java.util.Map;
 @Transactional(readOnly = true)
 @CacheConfig(cacheNames = "layoutContext")
 public class CacheLayoutContextService implements LayoutContextService {
-    private WebLayoutContextService webLayoutContextService;
+    private LayoutContextService layoutContextService;
 
     @Autowired
-    public void setWebLayoutContextService(WebLayoutContextService webLayoutContextService) {
-        this.webLayoutContextService = webLayoutContextService;
+    @Qualifier("webLayoutContextService")
+    public void setLayoutContextService(LayoutContextService layoutContextService) {
+        this.layoutContextService = layoutContextService;
     }
 
     @Cacheable(key = "#layoutIdx")
     @Override
     public Layout getLayout(String layoutIdx) {
-        return this.webLayoutContextService.getLayout(layoutIdx);
+        return this.layoutContextService.getLayout(layoutIdx);
     }
 
     @Override
     public Map<String, String> getAllLayoutName() {
-        return this.webLayoutContextService.getAllLayoutName();
+        return this.layoutContextService.getAllLayoutName();
     }
 
     @CacheEvict("'getAllLayoutName'")

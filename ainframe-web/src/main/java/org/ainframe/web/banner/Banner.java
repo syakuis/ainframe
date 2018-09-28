@@ -1,11 +1,11 @@
 package org.ainframe.web.banner;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -17,14 +17,14 @@ public class Banner {
         print();
     }
 
-    private Banner print() {
+    private void print() {
         StringBuilder print = new StringBuilder();
-        print.append("\n_________________________________________________________________________________\n");
+//        print.append("\n_____________________________________________________\n");
 
-        try {
+        try (
             InputStream input = getClass().getResourceAsStream("/ainframe-banner.txt");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input))
+        ) {
             String line;
             while ((line = reader.readLine()) != null) {
                 print.append(line).append("\n");
@@ -33,19 +33,14 @@ public class Banner {
             log.warn(e.getMessage(), e);
         }
 
-        String version = "1.0.0";
-
-        print.append("                                                                  version ")
-            .append(version)
-            .append("  \n")
-            .append("                                                                                 \n")
-            .append("                                                                                 \n")
-            .append("                           Frontend X Backend (Fxb) by 52572 49437 44512         \n")
-            .append("                                                                                 \n")
-            .append("_________________________________________________________________________________\n\n");
+//        String version = "1.0.0";
+//
+//        print.append(" ainframe with spring-boot            version ")
+//            .append(version)
+//            .append("  \n")
+//            .append("                                                     \n")
+//            .append("_____________________________________________________\n\n");
 
         System.out.println(print.toString());
-
-        return this;
     }
 }

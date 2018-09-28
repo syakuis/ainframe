@@ -1,7 +1,5 @@
 package org.ainframe.web.config.service;
 
-import static org.junit.Assert.*;
-
 import org.ainframe.context.ConfigContext;
 import org.ainframe.context.ConfigContextService;
 import org.ainframe.web.config.config.ConfigProperties;
@@ -16,6 +14,8 @@ import org.springframework.cache.CacheManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.*;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

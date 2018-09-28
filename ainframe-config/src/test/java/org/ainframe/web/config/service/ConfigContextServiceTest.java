@@ -1,8 +1,5 @@
 package org.ainframe.web.config.service;
 
-import static org.junit.Assert.*;
-
-import org.ainframe.context.ConfigContext;
 import org.ainframe.context.ConfigContextService;
 import org.ainframe.web.config.model.Config;
 import org.junit.Test;
@@ -13,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
