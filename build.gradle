@@ -1,4 +1,9 @@
 buildscript {
+    apply plugin: 'java'
+
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+
     ext {
         springBootVersion = '1.5.14.RELEASE'
     }
@@ -26,7 +31,7 @@ subprojects {
     // https://docs.gradle.org/current/dsl/org.gradle.plugins.ide.idea.model.IdeaModule.html
     idea {
         module {
-//            inheritOutputDirs = false
+            inheritOutputDirs = true
             outputDir = compileJava.destinationDir
             testOutputDir = compileTestJava.destinationDir
             jdkName = '1.7'
@@ -38,6 +43,7 @@ subprojects {
 
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
+    bootRepackage.enabled = false
 
     repositories {
         maven {

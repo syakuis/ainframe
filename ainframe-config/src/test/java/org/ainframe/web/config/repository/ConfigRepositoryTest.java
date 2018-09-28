@@ -35,9 +35,10 @@ public class ConfigRepositoryTest {
 
         ConfigEntity configEntity = ConfigEntity.builder()
                 .moduleIdx("MODUL000000001CONFIG")
+                .layoutIdx("LAOUT00000000DEFAULT")
                 .basicSkin("cdc")
                 .skin("gbdc")
-                .indexPage("/main")
+                .indexUrl("/main")
                 .build();
         configRepository.save(configEntity);
 

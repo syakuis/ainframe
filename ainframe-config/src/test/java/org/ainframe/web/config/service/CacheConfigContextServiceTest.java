@@ -39,10 +39,6 @@ public class CacheConfigContextServiceTest {
     @Autowired
     private CacheManager cacheManager;
 
-    @After
-    public void close() {
-    }
-
     @Test
     public void test() {
         Config config = configContextService.getConfig();
@@ -56,7 +52,6 @@ public class CacheConfigContextServiceTest {
     @Test
     public void contextTest() {
         Config config = configContextService.getConfig();
-        assertNotNull(config.getModuleIdx());
         assertEquals(config, configContext.getConfig());
         assertSame(config, configContext.getConfig());
     }
