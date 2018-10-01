@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @Slf4j
 @EqualsAndHashCode
-public class WebViewRender implements ModuleView, LayoutView {
+public class WebViewRender implements ModuleView, LayoutView, WebView {
     private final ModuleView moduleView;
     private final LayoutView layoutView;
 
@@ -60,6 +60,7 @@ public class WebViewRender implements ModuleView, LayoutView {
      * @param attributeName String key
      * @param attributeValue Object value
      */
+    @Override
     public void addObject(String attributeName, Object attributeValue) {
         this.modelAndView.addObject(attributeName, attributeValue);
     }
@@ -156,6 +157,7 @@ public class WebViewRender implements ModuleView, LayoutView {
         return this.layoutView.getLayoutFile();
     }
 
+    @Override
     public ModelAndView done() {
         Map<String, Object> data = new HashMap<>();
         data.put("module", this.getModule());

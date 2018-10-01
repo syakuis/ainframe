@@ -2,8 +2,6 @@ package org.ainframe.autoconfigure;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ainframe.web.banner.Banner;
-import org.ainframe.web.config.WebProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -5,12 +5,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.ainframe.context.ConfigContext;
 import org.ainframe.context.module.Module;
 import org.ainframe.context.module.ModuleContext;
-import org.ainframe.core.util.PathUtils;
 import org.ainframe.web.config.WebProperties;
 import org.ainframe.web.config.model.Config;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import java.io.File;
 import java.util.Objects;
 
 /**
@@ -27,6 +26,7 @@ public class ModuleViewRender implements ModuleView {
     private final Module module;
     @Getter
     private final Module parentModule;
+    private final String templateLoaderPath;
 
     /**
     * 현재 모듈의 경로를 설정한다.
@@ -60,6 +60,7 @@ public class ModuleViewRender implements ModuleView {
         this.defaultAdminSkin = webProperties.getAdminSkin();
         this.defaultSkin = webProperties.getSkin();
         this.defaultAdminLayoutIdx = webProperties.getAdminLayoutIdx();
+        this.templateLoaderPath = webProperties.getTemplateLoaderPath();
         this.config = configContext.getConfig();
 
         if (this.config == null) {
@@ -200,12 +201,13 @@ public class ModuleViewRender implements ModuleView {
      * @param templateFile 스킨 경로를 포함한 템플릿 파일
      * @return boolean
      */
-    public static boolean templateFileExists(String templateFile) {
+    public static boolean templateFileExists(String templateLoaderPath, String templateFile) {
         if (templateFile == null || templateFile.length() == 0) {
             throw new IllegalArgumentException("path 인자가 빈값이거나 널이다.");
         }
 
-        return new File(PathUtils.getRootClassPath() + templateFile).exists();
+        return new PathMatchingResourcePatternResolver()
+            .getResource(templateLoaderPath + templateFile).exists();
     }
 
 
@@ -215,7 +217,7 @@ public class ModuleViewRender implements ModuleView {
     private void defaultSkinAndTemplate() {
         this.changeSkinAndTemplate(this.getDefaultSkin(template), template);
 
-        if (!templateFileExists(this.templateFile)) {
+        if (!templateFileExists(this.templateLoaderPath, this.templateFile)) {
             log.warn("스킨에 템플릿 파일이 존재하지 않습니다. 기본 설정으로 변경됨 : skin = {} : template = {}", skin, template);
             this.changeSkinAndTemplate(this.config.getBasicSkin(), this.template);
         }

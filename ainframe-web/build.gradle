@@ -3,6 +3,9 @@ dependencies {
     compile project(':ainframe-layout')
     compile project(':ainframe-config')
     compile project(':ainframe-module')
+
+    compile 'org.springframework.boot:spring-boot-starter-freemarker'
+
     testCompile project(':ainframe-test')
     testCompile 'com.h2database:h2'
 }

@@ -18,6 +18,8 @@ import javax.validation.constraints.NotNull;
 @Validated
 @Data
 public class JpaProperties {
+    private String packageToScan;
+
     @NotNull
-    private boolean enable;
+    private String defaultPackageToScan;
 }

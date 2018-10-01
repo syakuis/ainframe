@@ -18,6 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Objects;
+
 import static org.junit.Assert.*;
 
 /**
@@ -111,12 +113,14 @@ public class WebViewResolverTest {
         String skin = getDefaultSkin(this.template);
         String templatePath = ModuleViewRender.createTemplatePath(this.module.getModuleName(), skin);
         String templateFile = ModuleViewRender.createTemplateFile(templatePath, this.template);
-        if (!ModuleViewRender.templateFileExists(templateFile)) {
+        if (!ModuleViewRender.templateFileExists(webProperties.getTemplateLoaderPath(), templateFile)) {
             templatePath = ModuleViewRender.createTemplatePath(this.module.getModuleName(), this.config.getBasicSkin());
             templateFile = ModuleViewRender.createTemplateFile(templatePath, this.template);
         }
 
+        assertTrue(templatePath != null && !Objects.equals(templatePath, ""));
         assertEquals(this.webView.getTemplatePath(), templatePath);
+        assertTrue(templateFile != null && !Objects.equals(templateFile, ""));
         assertEquals(this.webView.getTemplateFile(), templateFile);
     }
 

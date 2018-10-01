@@ -59,8 +59,6 @@ subprojects {
         compile 'org.springframework.boot:spring-boot-devtools'
         compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
-        compile 'org.springframework.boot:spring-boot-starter-freemarker'
-
         compile 'org.apache.commons:commons-lang3:3.7'
         compile 'commons-io:commons-io:2.5'
         compile 'com.google.guava:guava:20.0'

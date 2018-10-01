@@ -18,7 +18,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Builder
-public class DemoEntity {
+public class DemoEntity implements Demo {
     @Id
     @Column(name = "DEMO_SRL")
     @SequenceGenerator(
@@ -34,7 +34,7 @@ public class DemoEntity {
     private Date creationDate;
 
     @PrePersist
-    public void prePersist() {
+    public void onPrePersist() {
         this.creationDate = new Date();
     }
 }
