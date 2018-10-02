@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertSame;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

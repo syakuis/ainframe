@@ -11,6 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -32,5 +33,15 @@ public class TemplateResourceTest {
         assertTrue(new PathMatchingResourcePatternResolver().getResource(templatePath).exists());
         assertTrue(new PathMatchingResourcePatternResolver().getResource(
             webProperties.getTemplateLoaderPath() + "index.ftl").exists());
+    }
+
+    @Test
+    public void freeMarkerTemplateLoaderTest() throws Exception {
+      PathMatchingResourcePatternResolver matching = new PathMatchingResourcePatternResolver();
+      Resource[] resources = matching.getResources("classpath*:META-INF/templates/");
+      for (Resource resource : resources) {
+        log.debug("{}", resource.getURI().getPath());
+        log.debug("{}", resource.getURL().getFile());
+      }
     }
 }

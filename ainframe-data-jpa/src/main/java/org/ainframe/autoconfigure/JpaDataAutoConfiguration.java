@@ -3,7 +3,6 @@ package org.ainframe.autoconfigure;
 import lombok.extern.slf4j.Slf4j;
 import org.ainframe.core.util.Label;
 import org.ainframe.data.jpa.config.JpaProperties;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

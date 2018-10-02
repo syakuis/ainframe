@@ -4,7 +4,6 @@ import org.ainframe.context.ConfigContext;
 import org.ainframe.context.ConfigContextService;
 import org.ainframe.web.config.config.ConfigProperties;
 import org.ainframe.web.config.model.Config;
-import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

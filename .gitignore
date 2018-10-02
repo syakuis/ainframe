@@ -6,3 +6,4 @@ build/
 out/
 **/application-real.properties
 node_modules/
+dist/
