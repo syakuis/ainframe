@@ -30,8 +30,6 @@ public class DemoController {
 
         log.debug(render.toString());
 
-
-
         return render.done();
     }
 }
