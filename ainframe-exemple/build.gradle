@@ -1,5 +1,4 @@
 dependencies {
     compile project(':ainframe-webmvc')
-    testCompile project(':ainframe-test')
     compile 'com.h2database:h2'
 }

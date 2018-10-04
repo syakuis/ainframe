@@ -10,4 +10,5 @@ import org.springframework.data.repository.Repository;
 public interface ConfigRepository extends Repository<ConfigEntity, String> {
     ConfigEntity save(ConfigEntity configEntity);
     ConfigEntity findOneByModuleIdx(String moduleIdx);
+    String deleteByModuleIdx(String moduleIdx);
 }

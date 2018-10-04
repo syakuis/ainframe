@@ -2,10 +2,9 @@ package org.ainframe.autoconfigure;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ainframe.core.util.Label;
-import org.ainframe.data.jpa.config.JpaProperties;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
@@ -15,10 +14,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties(JpaProperties.class)
 //@ConditionalOnProperty(name="ainframe.data.jpa.enable", havingValue="true")
 @EntityScan("org.ainframe")
 @EnableJpaRepositories("org.ainframe")
+@PropertySource("classpath:ainframe/jpa.properties")
 public class JpaDataAutoConfiguration {
     public JpaDataAutoConfiguration() {
         if (log.isDebugEnabled()) {

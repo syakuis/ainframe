@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class StarterTest {
-    @Value("${ainframe.data.jpa.enable}")
+    @Value("${spring.data.jpa.repositories.enabled}")
     private boolean enable;
 
     @Test

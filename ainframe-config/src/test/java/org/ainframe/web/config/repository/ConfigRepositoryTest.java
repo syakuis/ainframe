@@ -33,8 +33,10 @@ public class ConfigRepositoryTest {
         assertEquals(configProperties.getModuleIdx(),
             configRepository.findOneByModuleIdx(configProperties.getModuleIdx()).getModuleIdx());
 
+        configRepository.deleteByModuleIdx(configProperties.getModuleIdx());
+
         ConfigEntity configEntity = ConfigEntity.builder()
-                .moduleIdx("MODUL000000001CONFIG")
+                .moduleIdx(configProperties.getModuleIdx())
                 .layoutIdx("LAOUT00000000DEFAULT")
                 .basicSkin("cdc")
                 .skin("gbdc")
@@ -42,8 +44,8 @@ public class ConfigRepositoryTest {
                 .build();
         configRepository.save(configEntity);
 
-        assertEquals(configEntity, configRepository.findOneByModuleIdx("MODUL000000001CONFIG"));
-        assertSame(configEntity, configRepository.findOneByModuleIdx("MODUL000000001CONFIG"));
+        assertEquals(configEntity, configRepository.findOneByModuleIdx(configProperties.getModuleIdx()));
+        assertSame(configEntity, configRepository.findOneByModuleIdx(configProperties.getModuleIdx()));
 
     }
 }
