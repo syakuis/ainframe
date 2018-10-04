@@ -1,13 +1,13 @@
-package org.syaku.exemple.app.demo.service;
+package org.syaku.example.app.demo.service;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.syaku.exemple.app.demo.domain.Demo;
-import org.syaku.exemple.app.demo.domain.DemoEntity;
-import org.syaku.exemple.app.demo.repository.DemoRepository;
+import org.syaku.example.app.demo.domain.Demo;
+import org.syaku.example.app.demo.domain.DemoEntity;
+import org.syaku.example.app.demo.repository.DemoRepository;
 
 import java.util.List;
 

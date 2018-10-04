@@ -9,5 +9,5 @@ include 'ainframe-module'
 include 'ainframe-webmvc'
 include 'ainframe-test'
 include 'ainframe-layout'
-include 'ainframe-exemple'
+include 'ainframe-example'
 

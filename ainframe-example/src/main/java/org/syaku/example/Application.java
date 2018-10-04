@@ -1,4 +1,4 @@
-package org.syaku.exemple;
+package org.syaku.example;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

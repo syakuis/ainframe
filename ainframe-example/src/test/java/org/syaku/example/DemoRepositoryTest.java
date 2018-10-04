@@ -1,4 +1,4 @@
-package org.syaku.exemple;
+package org.syaku.example;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -13,9 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.syaku.exemple.app.demo.domain.Demo;
-import org.syaku.exemple.app.demo.domain.DemoEntity;
-import org.syaku.exemple.app.demo.repository.DemoRepository;
+import org.syaku.example.app.demo.domain.Demo;
+import org.syaku.example.app.demo.domain.DemoEntity;
+import org.syaku.example.app.demo.repository.DemoRepository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;

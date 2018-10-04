@@ -1,7 +1,7 @@
-package org.syaku.exemple.app.demo.repository;
+package org.syaku.example.app.demo.repository;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.syaku.exemple.app.demo.domain.DemoEntity;
+import org.syaku.example.app.demo.domain.DemoEntity;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

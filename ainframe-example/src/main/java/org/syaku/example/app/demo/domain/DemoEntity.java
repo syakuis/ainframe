@@ -1,4 +1,4 @@
-package org.syaku.exemple.app.demo.domain;
+package org.syaku.example.app.demo.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

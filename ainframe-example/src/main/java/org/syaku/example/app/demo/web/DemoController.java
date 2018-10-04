@@ -1,4 +1,4 @@
-package org.syaku.exemple.app.demo.web;
+package org.syaku.example.app.demo.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ainframe.webmvc.view.WebViewRender;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.syaku.exemple.app.demo.service.WebDemoService;
+import org.syaku.example.app.demo.service.WebDemoService;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
