@@ -1,10 +1,10 @@
-package org.ainframe.web.view;
+package org.ainframe.webmvc.view;
 
 import org.ainframe.context.ConfigContext;
 import org.ainframe.context.LayoutContext;
 import org.ainframe.context.MenuContext;
 import org.ainframe.context.module.ModuleContext;
-import org.ainframe.web.config.WebProperties;
+import org.ainframe.webmvc.config.WebProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

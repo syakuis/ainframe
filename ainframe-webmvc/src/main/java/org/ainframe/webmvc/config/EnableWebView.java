@@ -1,4 +1,4 @@
-package org.ainframe.web.config;
+package org.ainframe.webmvc.config;
 
 import java.lang.annotation.*;
 

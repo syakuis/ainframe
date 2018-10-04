@@ -1,4 +1,4 @@
-package org.ainframe.web.banner;
+package org.ainframe.webmvc.banner;
 
 import lombok.extern.slf4j.Slf4j;
 

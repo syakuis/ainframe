@@ -1,4 +1,4 @@
-package org.ainframe.web.view;
+package org.ainframe.webmvc.view;
 
 import org.springframework.web.servlet.ModelAndView;
 

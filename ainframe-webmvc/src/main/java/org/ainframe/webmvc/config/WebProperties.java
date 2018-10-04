@@ -1,4 +1,4 @@
-package org.ainframe.web.config;
+package org.ainframe.webmvc.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;

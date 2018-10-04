@@ -1,4 +1,4 @@
-package org.ainframe.web.view;
+package org.ainframe.webmvc.view;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)

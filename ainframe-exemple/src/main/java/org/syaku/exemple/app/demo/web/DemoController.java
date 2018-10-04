@@ -1,8 +1,8 @@
 package org.syaku.exemple.app.demo.web;
 
 import lombok.extern.slf4j.Slf4j;
-import org.ainframe.web.view.WebViewRender;
-import org.ainframe.web.view.WebViewResolver;
+import org.ainframe.webmvc.view.WebViewRender;
+import org.ainframe.webmvc.view.WebViewResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

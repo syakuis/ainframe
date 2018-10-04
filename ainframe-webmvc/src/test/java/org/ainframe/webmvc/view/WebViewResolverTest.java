@@ -1,4 +1,4 @@
-package org.ainframe.web.view;
+package org.ainframe.webmvc.view;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ainframe.context.ConfigContext;
@@ -7,8 +7,9 @@ import org.ainframe.context.LayoutContext;
 import org.ainframe.context.MenuContext;
 import org.ainframe.context.module.Module;
 import org.ainframe.context.module.ModuleContext;
-import org.ainframe.web.config.WebProperties;
+import org.ainframe.webmvc.config.WebProperties;
 import org.ainframe.web.config.model.Config;
+import org.ainframe.webmvc.view.*;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;

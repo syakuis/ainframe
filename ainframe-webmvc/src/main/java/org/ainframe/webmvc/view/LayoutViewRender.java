@@ -1,4 +1,4 @@
-package org.ainframe.web.view;
+package org.ainframe.webmvc.view;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;

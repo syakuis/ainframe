@@ -1,10 +1,10 @@
-package org.ainframe.web.view;
+package org.ainframe.webmvc.view;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 10. 1.
  */
-import org.ainframe.web.config.WebProperties;
+import org.ainframe.webmvc.config.WebProperties;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
