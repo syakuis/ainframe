@@ -20,14 +20,14 @@ module.exports = {
         onStart: {
           delete: [
             path.join(__dirname, 'dist'),
-            path.join(__dirname, '../src/main/resources/META-INF/resources/dist'),
+            // path.join(__dirname, '../src/main/resources/META-INF/resources/dist'),
           ],
         },
-        onEnd: {
+        /*onEnd: {
           copy: [
             { source: path.join(__dirname, 'dist'), destination: path.join(__dirname, '../src/main/resources/META-INF/resources/dist') },
           ],
-        }
+        }*/
       }),
       new MiniCssExtractPlugin({
         filename: "[name].css",

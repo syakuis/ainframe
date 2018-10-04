@@ -56,7 +56,7 @@ subprojects {
     dependencies {
         compile 'org.springframework.boot:spring-boot-starter-web'
         testCompile 'org.springframework.boot:spring-boot-starter-test'
-        compile 'org.springframework.boot:spring-boot-devtools'
+        compileOnly 'org.springframework.boot:spring-boot-devtools'
         compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
 
         compile 'org.apache.commons:commons-lang3:3.7'

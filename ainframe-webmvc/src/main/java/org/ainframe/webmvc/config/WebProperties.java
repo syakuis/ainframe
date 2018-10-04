@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
  */
 @Configuration
 @PropertySource("classpath:ainframe/web.properties")
-@ConfigurationProperties(prefix = "ainframe.web.view")
+@ConfigurationProperties(prefix = "ainframe.webmvc")
 @Validated
 @Data
 public class WebProperties {
@@ -30,4 +30,6 @@ public class WebProperties {
 
     @Value("${spring.freemarker.template-loader-path}")
     private String[] templateLoaderPaths;
+
+    private String staticsResourceLocation;
 }
