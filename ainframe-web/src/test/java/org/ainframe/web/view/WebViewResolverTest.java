@@ -96,6 +96,9 @@ public class WebViewResolverTest {
         assertSame(this.webView.getParentModule(), this.moduleContext.getModule(this.module.getModuleName()));
     }
 
+  /**
+   * {@link ModuleViewRender#getDefaultSkin(String)}
+   */
     private String getDefaultSkin(String template) {
         if (WebViewUtils.isAdminTemplate(template)) {
             return webProperties.getAdminSkin();
@@ -108,15 +111,28 @@ public class WebViewResolverTest {
         return StringUtils.defaultIfEmpty(this.module.getSkin(), this.webProperties.getSkin());
     }
 
+  /**
+   * {@link ModuleViewRender} 초기 설정에서 기본 스킨을 검사하여 설정하는 부분을 구현하였다.
+   * 실제 템플릿 파일 존재 유무에 따라 스킨이 변경된다.
+   */
+    private String getDefaultSkinAndTemplateExists(String template) {
+      String skin = getDefaultSkin(template);
+
+        String templatePath = ModuleViewRender.createTemplatePath(this.module.getModuleName(), skin);
+        String templateFile = ModuleViewRender.createTemplateFile(templatePath, template);
+
+        if (!ModuleViewRender.templateFileExists(webProperties.getTemplateLoaderPaths(), templateFile)) {
+          return this.config.getBasicSkin();
+        }
+
+        return skin;
+    }
+
     @Test
     public void defaultSkinAndTemplateTest() {
-        String skin = getDefaultSkin(this.template);
+        String skin = getDefaultSkinAndTemplateExists(this.template);
         String templatePath = ModuleViewRender.createTemplatePath(this.module.getModuleName(), skin);
         String templateFile = ModuleViewRender.createTemplateFile(templatePath, this.template);
-        if (!ModuleViewRender.templateFileExists(webProperties.getTemplateLoaderPath(), templateFile)) {
-            templatePath = ModuleViewRender.createTemplatePath(this.module.getModuleName(), this.config.getBasicSkin());
-            templateFile = ModuleViewRender.createTemplateFile(templatePath, this.template);
-        }
 
         assertTrue(templatePath != null && !Objects.equals(templatePath, ""));
         assertEquals(this.webView.getTemplatePath(), templatePath);
@@ -137,9 +153,10 @@ public class WebViewResolverTest {
 
     @Test
     public void templateChangeTest() {
-        String template = "admin.list.ftl";
+        String template = "test.list.ftl";
         this.webView.changeTemplate(template);
-        String templatePath = ModuleViewRender.createTemplatePath(this.module.getModuleName(), this.module.getSkin());
+        String templatePath = ModuleViewRender.createTemplatePath(
+          this.module.getModuleName(), getDefaultSkinAndTemplateExists(template));
         String templateFile = ModuleViewRender.createTemplateFile(templatePath, template);
 
         assertEquals(this.webView.getTemplatePath(), templatePath);

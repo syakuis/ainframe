@@ -13,6 +13,12 @@ public interface ModuleView {
 
     void changeSkin(String skin);
 
+  /**
+   * admin 템플릿으로 변경하여도 admin 레이아웃으로 자동 변경되지 않는 다.
+   * 스킨 및 템플릿 변경에서는 실제 템플릿이 존재하는지를 검사하지 않는 다.
+   * @param skin
+   * @param template
+   */
     void changeSkinAndTemplate(String skin, String template);
 
     org.ainframe.context.module.Module getModule();

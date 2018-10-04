@@ -22,7 +22,9 @@ public class IndexTemplateTest {
 
     @Test
     public void test() {
-        assertTrue(new PathMatchingResourcePatternResolver().getResource(
-            webProperties.getTemplateLoaderPath() + "index.ftl").exists());
+      for (String templateLoaderPath: webProperties.getTemplateLoaderPaths()) {
+        assertTrue(templateLoaderPath + ", not found", new PathMatchingResourcePatternResolver().getResource(
+             templateLoaderPath + "index.ftl").exists());
+      }
     }
 }

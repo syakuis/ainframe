@@ -29,5 +29,5 @@ public class WebProperties {
     private String skin;
 
     @Value("${spring.freemarker.template-loader-path}")
-    private String templateLoaderPath;
+    private String[] templateLoaderPaths;
 }
