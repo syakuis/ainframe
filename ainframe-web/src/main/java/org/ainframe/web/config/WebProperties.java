@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
  * @since 2018. 9. 27.
  */
 @Configuration
-@PropertySource("classpath:org/ainframe/web/web.properties")
+@PropertySource("classpath:ainframe/web.properties")
 @ConfigurationProperties(prefix = "ainframe.web.view")
 @Validated
 @Data

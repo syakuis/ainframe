@@ -1,4 +1,4 @@
-package org.ainframe.cache.autoconfigure;
+package org.ainframe.cache.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
  * @since 2018. 8. 10.
  */
 @Configuration
-@PropertySource("classpath:org/ainframe/cache/config/cache.properties")
+@PropertySource("classpath:ainframe/cache.properties")
 @ConfigurationProperties(prefix = "ainframe.cache.ehcache")
 @Data
 public class EhCacheProperties {

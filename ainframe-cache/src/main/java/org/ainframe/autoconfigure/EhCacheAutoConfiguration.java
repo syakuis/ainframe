@@ -1,7 +1,8 @@
-package org.ainframe.cache.autoconfigure;
+package org.ainframe.autoconfigure;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ainframe.cache.bean.factory.MultipleEhCacheManagerFactoryBean;
+import org.ainframe.cache.config.EhCacheProperties;
 import org.ainframe.core.util.Label;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

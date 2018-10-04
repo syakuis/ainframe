@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * @since 2018. 9. 28.
  */
 @Configuration
-@PropertySource("classpath:org/ainframe/data/jpa/config/jpa.properties")
+@PropertySource("classpath:ainframe/jpa.properties")
 @ConfigurationProperties(prefix = "ainframe.data.jpa")
 @Validated
 @Data

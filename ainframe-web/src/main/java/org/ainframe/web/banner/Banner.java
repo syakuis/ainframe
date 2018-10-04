@@ -22,7 +22,7 @@ public class Banner {
 //        print.append("\n_____________________________________________________\n");
 
         try (
-            InputStream input = getClass().getResourceAsStream("/ainframe-banner.txt");
+            InputStream input = getClass().getResourceAsStream("/ainframe/banner.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(input))
         ) {
             String line;
