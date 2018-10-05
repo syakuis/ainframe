@@ -30,6 +30,4 @@ public class WebProperties {
 
     @Value("${spring.freemarker.template-loader-path}")
     private String[] templateLoaderPaths;
-
-    private String staticsResourceLocation;
 }

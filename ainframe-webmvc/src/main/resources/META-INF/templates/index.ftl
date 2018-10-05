@@ -1,8 +1,8 @@
 <#assign css_bundle>
-    <link rel="stylesheet" href="<@spring.url "/static/dist/bundle.css" />">
+    <link rel="stylesheet" href="<@spring.url "/resources/dist/bundle.css" />">
 </#assign>
 <#assign js_bundle>
-    <script src="<@spring.url "/static/dist/bundle.js" />"></script>
+    <script src="<@spring.url "/resources/dist/bundle.js" />"></script>
 </#assign>
 <#if !MV.onlyUseModule>
 <!DOCTYPE html>
