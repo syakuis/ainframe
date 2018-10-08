@@ -10,8 +10,9 @@ import org.ainframe.context.LayoutContext;
 import org.ainframe.context.MenuContext;
 import org.ainframe.context.module.Module;
 import org.ainframe.context.module.ModuleContext;
-import org.ainframe.webmvc.config.WebProperties;
 import org.ainframe.web.menu.model.Menu;
+import org.ainframe.webmvc.config.WebProperties;
+import org.ainframe.webmvc.support.freemarker.TemplateFinder;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -38,9 +39,17 @@ public class WebViewRender implements ModuleView, LayoutView, WebView {
 
     public WebViewRender(
         WebProperties webProperties, ModuleContext moduleContext,
-        LayoutContext layoutContext, MenuContext menuContext, ConfigContext configContext, String moduleId, String template) {
+        LayoutContext layoutContext, MenuContext menuContext,
+        ConfigContext configContext, TemplateFinder templateFinder,
+        String moduleId, String template) {
 
-        ModuleViewRender moduleViewRender = new ModuleViewRender(webProperties, moduleContext, configContext, moduleId);
+        ModuleViewRender moduleViewRender = new ModuleViewRender(
+          DefaultWebViewAdapter.builder()
+            .webProperties(webProperties)
+            .config(configContext.getConfig())
+            .templateFinder(templateFinder)
+            .build(),
+          moduleContext, moduleId);
         moduleViewRender.render(template);
 
         String layoutIdx = moduleViewRender.getDefaultLayoutIdx(template);

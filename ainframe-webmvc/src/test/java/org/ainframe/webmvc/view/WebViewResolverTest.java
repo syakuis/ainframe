@@ -7,9 +7,9 @@ import org.ainframe.context.LayoutContext;
 import org.ainframe.context.MenuContext;
 import org.ainframe.context.module.Module;
 import org.ainframe.context.module.ModuleContext;
-import org.ainframe.webmvc.config.WebProperties;
 import org.ainframe.web.config.model.Config;
-import org.ainframe.webmvc.view.*;
+import org.ainframe.webmvc.config.WebProperties;
+import org.ainframe.webmvc.support.freemarker.TemplateFinder;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import java.util.Objects;
 
@@ -50,6 +51,9 @@ public class WebViewResolverTest {
 
     @Autowired
     private MenuContext menuContext;
+
+    @Autowired
+    private FreeMarkerConfigurer freeMarkerConfigurer;
 
     private Config config;
     private Module module;
@@ -122,7 +126,9 @@ public class WebViewResolverTest {
         String templatePath = ModuleViewRender.createTemplatePath(this.module.getModuleName(), skin);
         String templateFile = ModuleViewRender.createTemplateFile(templatePath, template);
 
-        if (!ModuleViewRender.templateFileExists(webProperties.getTemplateLoaderPaths(), templateFile)) {
+      TemplateFinder templateFinder = new TemplateFinder(freeMarkerConfigurer);
+
+        if (!templateFinder.exists(templateFile)) {
           return this.config.getBasicSkin();
         }
 

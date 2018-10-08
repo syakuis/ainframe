@@ -5,8 +5,10 @@ import org.ainframe.context.LayoutContext;
 import org.ainframe.context.MenuContext;
 import org.ainframe.context.module.ModuleContext;
 import org.ainframe.webmvc.config.WebProperties;
+import org.ainframe.webmvc.support.freemarker.TemplateFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -19,6 +21,7 @@ public class WebViewResolver {
     private ConfigContext configContext;
     private LayoutContext layoutContext;
     private MenuContext menuContext;
+    private FreeMarkerConfigurer freeMarkerConfigurer;
 
     @Autowired
     public void setWebProperties(WebProperties webProperties) {
@@ -45,11 +48,12 @@ public class WebViewResolver {
         this.configContext = configContext;
     }
 
+    @Autowired
+    public void setFreeMarkerConfigurer(FreeMarkerConfigurer freeMarkerConfigurer) {
+      this.freeMarkerConfigurer = freeMarkerConfigurer;
+    }
 
-
-
-
-    /**
+  /**
      * ModuleViewRender 를 인스턴스한다.
      * @param moduleId 모듈id
      * @return ModuleViewRender
@@ -61,6 +65,7 @@ public class WebViewResolver {
             .layoutContext(layoutContext)
             .menuContext(menuContext)
             .moduleContext(moduleContext)
+            .templateFinder(new TemplateFinder(freeMarkerConfigurer))
             .moduleId(moduleId)
             .template(template)
             .build();

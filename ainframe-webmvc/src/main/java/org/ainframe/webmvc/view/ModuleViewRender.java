@@ -2,13 +2,10 @@ package org.ainframe.webmvc.view;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.ainframe.context.ConfigContext;
 import org.ainframe.context.module.Module;
 import org.ainframe.context.module.ModuleContext;
-import org.ainframe.webmvc.config.WebProperties;
 import org.ainframe.web.config.model.Config;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import java.util.Objects;
 
@@ -18,15 +15,11 @@ import java.util.Objects;
  */
 @Slf4j
 public class ModuleViewRender implements ModuleView {
-    private final String defaultAdminSkin;
-    private final String defaultAdminLayoutIdx;
-    private final String defaultSkin;
-    private final Config config;
+  private final WebViewAdapter webViewAdapter;
     @Getter
     private final Module module;
     @Getter
     private final Module parentModule;
-    private final String[] templateLoaderPaths;
 
     /**
     * 현재 모듈의 경로를 설정한다.
@@ -56,30 +49,22 @@ public class ModuleViewRender implements ModuleView {
     @Getter
     private String templateFile;
 
-    public ModuleViewRender(WebProperties webProperties, ModuleContext moduleContext, ConfigContext configContext, String moduleId) {
-        this.defaultAdminSkin = webProperties.getAdminSkin();
-        this.defaultSkin = webProperties.getSkin();
-        this.defaultAdminLayoutIdx = webProperties.getAdminLayoutIdx();
-        this.templateLoaderPaths = webProperties.getTemplateLoaderPaths();
-        this.config = configContext.getConfig();
+    public ModuleViewRender(WebViewAdapter webViewAdapter, ModuleContext moduleContext, String moduleId) {
+      this.webViewAdapter = webViewAdapter;
 
-        if (this.config == null) {
-            throw new IllegalArgumentException("config object must not be null.");
-        }
+      this.module = moduleContext.getModule(moduleId);
 
-        this.module = moduleContext.getModule(moduleId);
+      if (this.module == null) {
+          throw new IllegalArgumentException("module object must not be null.");
+      }
 
-        if (this.module == null) {
-            throw new IllegalArgumentException("module object must not be null.");
-        }
+      this.modulePath = WebViewUtils.getModulePath(this.module.getModuleName(), moduleId);
 
-        this.modulePath = WebViewUtils.getModulePath(this.module.getModuleName(), moduleId);
-
-        if (!Objects.equals(moduleId, module.getModuleName())) {
-            this.parentModule = moduleContext.getModule(this.module.getModuleName());
-        } else {
-            this.parentModule = module;
-        }
+      if (!Objects.equals(moduleId, module.getModuleName())) {
+          this.parentModule = moduleContext.getModule(this.module.getModuleName());
+      } else {
+          this.parentModule = module;
+      }
     }
 
     public void render(String template) {
@@ -104,14 +89,15 @@ public class ModuleViewRender implements ModuleView {
      */
     private String getDefaultSkin(String template) {
         if (WebViewUtils.isAdminTemplate(template)) {
-            return this.defaultAdminSkin;
+            return this.webViewAdapter.getDefaultAdminSkin();
         }
 
         if (this.module.isOnlyUseTheme()) {
-            return StringUtils.defaultIfEmpty(config.getSkin(), config.getBasicSkin());
+            return StringUtils.defaultIfEmpty(
+              this.webViewAdapter.getConfigSkin(), this.webViewAdapter.getConfigBasicSkin());
         }
 
-        return StringUtils.defaultIfEmpty(this.module.getSkin(), this.defaultSkin);
+        return StringUtils.defaultIfEmpty(this.module.getSkin(), this.webViewAdapter.getDefaultSkin());
     }
 
     @Override
@@ -127,7 +113,7 @@ public class ModuleViewRender implements ModuleView {
      */
     @Override
     public void changeBrowserTitle(String browserTitle, boolean must) {
-        if (this.config.isBrowserTitleOverwrite() || must) {
+        if (this.webViewAdapter.isConfigBrowserTitleOverwrite() || must) {
             this.browserTitle = browserTitle;
         } else {
             log.warn("브라우저 타이틀을 변경할 수 없게 설정되어있다.");
@@ -197,35 +183,14 @@ public class ModuleViewRender implements ModuleView {
     }
 
     /**
-     * templateFile 존재여부 판단.
-     * @param templateFile 스킨 경로를 포함한 템플릿 파일
-     * @return boolean
-     */
-    public static boolean templateFileExists(String[] templateLoaderPaths, String templateFile) {
-        if (templateFile == null || templateFile.length() == 0) {
-            throw new IllegalArgumentException("path 인자가 빈값이거나 널이다.");
-        }
-
-        for (String templateLoaderPath : templateLoaderPaths) {
-          if (new PathMatchingResourcePatternResolver()
-            .getResource(templateLoaderPath + templateFile).exists()) {
-            return true;
-          }
-        }
-
-        return false;
-    }
-
-
-    /**
      * 기본 스킨과 템플릿을 설정하고 실제 파일이 존재하지 않으면 기본 스킨과 템플릿을 설정한다.
      */
     private void defaultSkinAndTemplate() {
         this.changeSkinAndTemplate(this.getDefaultSkin(template), template);
 
-        if (!templateFileExists(this.templateLoaderPaths, this.templateFile)) {
+        if (!this.webViewAdapter.isTemplateExists(this.templateFile)) {
             log.warn("스킨에 템플릿 파일이 존재하지 않습니다. 기본 설정으로 변경됨 : skin = {} : template = {}", skin, template);
-            this.changeSkinAndTemplate(this.config.getBasicSkin(), this.template);
+            this.changeSkinAndTemplate(this.webViewAdapter.getConfigBasicSkin(), this.template);
         }
     }
 
@@ -239,11 +204,11 @@ public class ModuleViewRender implements ModuleView {
     public String getDefaultLayoutIdx(String template) {
         // 관리자 여부에 따라 기본 스킨과 레이아웃이 변경됨.
         if (WebViewUtils.isAdminTemplate(template)) {
-            return this.defaultAdminLayoutIdx;
+            return this.webViewAdapter.getDefaultAdminLayoutIdx();
         } else if (this.module.isOnlyUseTheme()) {
-            return this.config.getLayoutIdx();
+            return this.webViewAdapter.getConfigLayoutIdx();
         }
 
-        return StringUtils.defaultIfEmpty(this.module.getLayoutIdx(), this.config.getLayoutIdx());
+        return StringUtils.defaultIfEmpty(this.module.getLayoutIdx(), this.webViewAdapter.getConfigLayoutIdx());
     }
 }

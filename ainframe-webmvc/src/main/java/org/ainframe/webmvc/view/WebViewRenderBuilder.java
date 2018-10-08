@@ -5,6 +5,7 @@ import org.ainframe.context.LayoutContext;
 import org.ainframe.context.MenuContext;
 import org.ainframe.context.module.ModuleContext;
 import org.ainframe.webmvc.config.WebProperties;
+import org.ainframe.webmvc.support.freemarker.TemplateFinder;
 
 /**
  * @author Seok Kyun. Choi. 최석균 (Syaku)
@@ -16,6 +17,7 @@ public class WebViewRenderBuilder {
     private LayoutContext layoutContext;
     private MenuContext menuContext;
     private ConfigContext configContext;
+    private TemplateFinder templateFinder;
     private String moduleId;
     private String template;
 
@@ -48,6 +50,11 @@ public class WebViewRenderBuilder {
         return this;
     }
 
+    public WebViewRenderBuilder templateFinder(TemplateFinder templateFinder) {
+        this.templateFinder = templateFinder;
+        return this;
+    }
+
     public WebViewRenderBuilder moduleId(String moduleId) {
         this.moduleId = moduleId;
         return this;
@@ -60,6 +67,7 @@ public class WebViewRenderBuilder {
 
     public WebViewRender build() {
         return new WebViewRender(
-            webProperties, moduleContext, layoutContext, menuContext, configContext, moduleId, template);
+          webProperties, moduleContext, layoutContext, menuContext,
+          configContext, templateFinder, moduleId, template);
     }
 }

@@ -1,7 +1,6 @@
 package org.ainframe.webmvc.config;
 
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -27,7 +26,4 @@ public class WebProperties {
     private String adminSkin;
     @NotNull
     private String skin;
-
-    @Value("${spring.freemarker.template-loader-path}")
-    private String[] templateLoaderPaths;
 }

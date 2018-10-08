@@ -4,13 +4,14 @@ package org.ainframe.webmvc.view;
  * @author Seok Kyun. Choi. 최석균 (Syaku)
  * @since 2018. 10. 1.
  */
-import org.ainframe.webmvc.config.WebProperties;
+
+import org.ainframe.webmvc.support.freemarker.TemplateFinder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import static org.junit.Assert.assertTrue;
 
@@ -18,13 +19,11 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest
 public class IndexTemplateTest {
     @Autowired
-    private WebProperties webProperties;
+    private FreeMarkerConfigurer freeMarkerConfigurer;
 
     @Test
     public void test() {
-      for (String templateLoaderPath: webProperties.getTemplateLoaderPaths()) {
-        assertTrue(templateLoaderPath + ", not found", new PathMatchingResourcePatternResolver().getResource(
-             templateLoaderPath + "index.ftl").exists());
-      }
+      TemplateFinder templateFinder = new TemplateFinder(freeMarkerConfigurer);
+      assertTrue(templateFinder.exists("index.ftl"));
     }
 }
