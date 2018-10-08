@@ -2,3 +2,8 @@ dependencies {
     compile project(':ainframe-webmvc')
     compile 'com.h2database:h2'
 }
+
+bootRepackage {
+  enabled = true
+  mainClass = 'org.syaku.example.Application'
+}
