@@ -1,12 +1,10 @@
 package org.ainframe.web.module.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.ainframe.context.module.Module;
 import org.ainframe.context.module.ModuleOption;
 import org.ainframe.core.data.enums.YesOrNo;
@@ -14,6 +12,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +31,9 @@ import java.util.Map;
 @AllArgsConstructor
 @Builder
 public class ModuleEntity implements Serializable {
+    @Setter(AccessLevel.NONE)
+    @Id
+    @Column(name = "MODULE_IDX", nullable = false, length = 20)
     @SequenceGenerator(
         name = "MODULE_IDX_GEN",
         sequenceName = "MODULE_IDX_SEQ",
@@ -50,13 +52,15 @@ public class ModuleEntity implements Serializable {
                 name = "sequence_prefix", value = "MODU"),
         }
     )
-    @Id
-    @Column(name = "MODULE_IDX", nullable = false, length = 20)
     private String moduleIdx;
 
+    @NotNull
+    @Setter(AccessLevel.NONE)
     @Column(name = "MODULE_ID", nullable = false, unique = true)
     private String moduleId;
 
+    @NotNull
+    @Setter(AccessLevel.NONE)
     @Column(name = "MODULE_NAME", nullable = false)
     private String moduleName;
 
@@ -74,11 +78,13 @@ public class ModuleEntity implements Serializable {
     @Column(name = "USE_THEME")
     private YesOrNo onlyUseTheme;
 
+    @Setter(AccessLevel.NONE)
     @Column(name = "REG_DATE", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     // todo 등록일 및 생성일 필드명 개선
     private Date regDate;
 
+    @JsonIgnore
     @OneToMany(targetEntity = ModuleOptionEntity.class)
     @JoinColumn(name = "MODULE_IDX")
     private List<ModuleOptionEntity> moduleOptionEntities;

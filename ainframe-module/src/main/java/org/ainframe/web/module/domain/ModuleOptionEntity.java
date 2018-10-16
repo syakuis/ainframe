@@ -1,11 +1,9 @@
 package org.ainframe.web.module.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -21,18 +19,22 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 public class ModuleOptionEntity implements Serializable {
+    @Setter(AccessLevel.NONE)
+    @Id
+    @Column(name = "MODULE_OPTIONS_SRL")
     @SequenceGenerator(
         name = "MODULE_OPTIONS_SRL_GEN",
         sequenceName = "MODULE_OPTIONS_SRL_SEQ",
         allocationSize = 1)
     @GeneratedValue(generator = "MODULE_OPTIONS_SRL_GEN", strategy = GenerationType.SEQUENCE)
-    @Id
-    @Column(name = "MODULE_OPTIONS_SRL")
     private long moduleOptionIdx;
 
+    @NotNull
+    @Setter(AccessLevel.NONE)
     @Column(name = "MODULE_IDX", nullable = false)
     private String moduleIdx;
 
+    @NotNull
     @Column(name = "OPTIONS_NAME", nullable = false)
     private String name;
 

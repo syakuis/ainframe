@@ -1,0 +1,10 @@
+dependencies {
+  compile project(":ainframe-webmvc")
+  compileOnly "com.h2database:h2"
+  testCompileOnly "com.h2database:h2"
+}
+
+bootRepackage {
+  enabled = true
+  mainClass = 'org.ainframe.ApplicationWebModule'
+}

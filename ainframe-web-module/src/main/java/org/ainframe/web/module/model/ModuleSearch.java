@@ -1,4 +1,4 @@
-package org.ainframe.web.module.view.model;
+package org.ainframe.web.module.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

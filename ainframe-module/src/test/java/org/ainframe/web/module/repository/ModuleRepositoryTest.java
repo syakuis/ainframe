@@ -70,4 +70,23 @@ public class ModuleRepositoryTest {
 
         assertTrue(aModuleEntity.getModuleOptionEntities().size() == 0);
     }
+
+    @Test
+    public void 불변테스트() {
+      ModuleEntity moduleEntity = ModuleEntity.builder()
+          .moduleId("test")
+          .moduleName("test")
+          .moduleOptionEntities(ModuleEntity.createModuleOptionEntities(
+              ModuleOptionEntity.builder().name("op1").value("op1").build(),
+              ModuleOptionEntity.builder().name("op2").value("op2").build()
+          )).build();
+       moduleRepository.save(moduleEntity);
+
+       assertEquals(moduleRepository.findOne(moduleEntity.getModuleIdx()), moduleEntity);
+
+       moduleEntity.setBrowserTitle("good!");
+
+       assertEquals(moduleRepository.findOne(moduleEntity.getModuleIdx()).getBrowserTitle(), "good!");
+
+    }
 }

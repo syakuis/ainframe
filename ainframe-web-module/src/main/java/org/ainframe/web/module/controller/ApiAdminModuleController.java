@@ -5,25 +5,17 @@ package org.ainframe.web.module.controller;
  * @since 2018. 8. 27.
  */
 
-import org.ainframe.web.module.config.ModuleProperties;
 import org.ainframe.web.module.domain.ModuleEntity;
+import org.ainframe.web.module.domain.ModuleExport;
 import org.ainframe.web.module.model.ModuleSearch;
 import org.ainframe.web.module.service.ViewModuleService;
-import org.ainframe.webmvc.view.WebViewResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/admin/module")
-public class ApiModuleController {
-  @Autowired
-  private ModuleProperties moduleProperties;
-  @Autowired
-  private WebViewResolver webViewResolver;
+public class ApiAdminModuleController {
   @Autowired
   private ViewModuleService viewModuleService;
 
@@ -42,7 +34,18 @@ public class ApiModuleController {
       page, 10, moduleSearch);
   }
 
-  // todo 모듈 수정
+  @GetMapping("/{id}")
+  public ModuleEntity getModule(@PathVariable("id") String moduleIdx) {
+    return viewModuleService.getModule(moduleIdx);
+  }
 
-  // todo 모듈 삭제
+  @PostMapping()
+  public ModuleEntity save(@RequestBody ModuleEntity moduleEntity) {
+    return viewModuleService.save(moduleEntity);
+  }
+
+  @DeleteMapping("/{id")
+  public void delete(@PathVariable("id") String moduleIdx) {
+    viewModuleService.delete(moduleIdx);
+  }
 }
