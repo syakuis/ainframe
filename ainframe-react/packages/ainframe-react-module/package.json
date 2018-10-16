@@ -1,0 +1,25 @@
+{
+  "name": "ainframe-react-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack -p --config webpack.config.prod.js",
+    "dev": "webpack -d --config webpack.config.dev.js",
+    "start": "webpack-dev-server -d --config webpack.config.dev.js"
+  },
+  "author": "Syaku (최석균) <http://syaku.tistory.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.4.1",
+    "ainframe-react-component": "^1.0.0",
+    "ainframe-react-context": "^1.0.0",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "font-awesome": "^4.7.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-router-dom": "^4.3.1"
+  }
+}

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+case ${2} in
+  add)
+    lerna --scope=ainframe-react-${1} add ${3}
+    ;;
+  *)
+    lerna --scope=ainframe-react-${1} exec -- npm run ${2}
+    ;;
+esac
+

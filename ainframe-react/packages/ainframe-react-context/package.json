@@ -1,0 +1,23 @@
+{
+  "name": "ainframe-react-context",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Syaku (최석균) <http://syaku.tistory.com>",
+  "license": "MIT",
+  "main": "dist/context.js",
+  "scripts": {
+    "build": "webpack -p --config ./webpack.config.prod.js",
+    "dev": "webpack -d --config ./webpack.config.dev.js"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.4.1",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "font-awesome": "^4.7.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-helmet": "^5.2.0",
+    "react-router-dom": "^4.3.1"
+  }
+}
