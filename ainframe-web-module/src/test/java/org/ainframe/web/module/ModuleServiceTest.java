@@ -2,7 +2,7 @@ package org.ainframe.web.module;
 
 import org.ainframe.web.module.service.ModuleService;
 import org.ainframe.web.module.service.ViewModuleService;
-import org.ainframe.web.module.service.model.ModuleSearch;
+import org.ainframe.web.module.model.ModuleSearch;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

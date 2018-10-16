@@ -23,20 +23,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @ActiveProfiles("test")
 public class ControllerTest {
-    private MockMvc mockMvc;
+  private MockMvc mockMvc;
 
-    @Autowired
-    private WebApplicationContext wac;
+  @Autowired
+  private WebApplicationContext wac;
 
-    @Before
-    public void before() {
-        this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-    }
+  @Before
+  public void before() {
+    this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+  }
 
-    @Test
-    public void test() throws Exception {
-        this.mockMvc.perform(get("/admin/module"))
-            .andExpect(status().isOk())
-            .andDo(print());
-    }
+  @Test
+  public void test() throws Exception {
+    this.mockMvc.perform(get("/admin/module"))
+      .andExpect(status().isOk())
+      .andDo(print());
+  }
 }
