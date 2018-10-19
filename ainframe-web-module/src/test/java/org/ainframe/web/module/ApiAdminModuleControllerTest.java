@@ -2,7 +2,6 @@ package org.ainframe.web.module;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.ainframe.web.module.domain.ModuleEntity;
-import org.ainframe.web.module.domain.ModuleExport;
 import org.ainframe.web.module.service.ViewModuleService;
 import org.junit.Before;
 import org.junit.Test;
