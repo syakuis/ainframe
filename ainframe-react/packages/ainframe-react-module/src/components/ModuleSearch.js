@@ -18,10 +18,13 @@ class ModuleSearch extends React.Component {
   }
 
   render() {
+    const { searchType, searchValue } = this.state;
     return (
       <div className="card">
         <div className="card-body">
           <InputSearch onSubmit={this.onKeywordSearchSubmit} />
+          {searchType}
+          {searchValue}
         </div>
       </div>
     );

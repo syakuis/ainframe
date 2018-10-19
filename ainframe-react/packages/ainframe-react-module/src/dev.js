@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom';
 import Apps from './App';
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 ReactDOM.render(<Apps />, document.getElementById('app'));

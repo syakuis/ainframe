@@ -30,15 +30,15 @@ class ModuleList extends React.Component {
           </tr>
         </thead>
         <tbody>
-          <tr scope="row">
-            <td>-</td>
-            <td>obj.moduleName}</td>
-            <td>obj.moduleId}</td>
-            <td>obj.browserTitle}</td>
+          <tr>
+            <th scope="row">1</th>
+            <td>moduleName</td>
+            <td>moduleId</td>
+            <td>browserTitle</td>
             <td>s</td>
-            <td>obj.layoutIdx?if_exists}</td>
-            <td>obj.skin?if_exists}</td>
-            <td>obj.regDate?string}</td>
+            <td>layoutIdx?if_exists</td>
+            <td>skin?if_exists</td>
+            <td>regDate?string</td>
           </tr>
         </tbody>
       </table>
