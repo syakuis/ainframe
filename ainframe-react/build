@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "Lerna Sterted"
+echo "{1}: project {2}: package {3}: job"
+
 case ${2} in
   add)
     lerna --scope=ainframe-react-${1} add ${3}
