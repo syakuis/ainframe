@@ -1,5 +1,5 @@
 import './App';
+import Input from './components/Input';
 import InputSearch from './components/InputSearch';
 
-export default InputSearch;
-export { InputSearch };
+export { Input, InputSearch };
