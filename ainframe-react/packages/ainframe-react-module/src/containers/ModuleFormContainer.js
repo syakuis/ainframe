@@ -1,30 +1,56 @@
 import React from 'react';
-import Input from './components/Input';
+import {
+  Input,
+  SelectBox,
+  CheckBox,
+  AddButton,
+  RemoveButton,
+  SaveButton,
+  DeleteButton,
+  SettingButton,
+} from 'ainframe-react-component';
 
 class ModuleFormContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onChangeInput = this.onChangeInput.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     this.state = {
       moduleName: '',
       moduleId: '',
+      browserTitle: '',
+      layoutIdx: '',
+      skin: '',
+      onlyUseTheme: '',
+      optionName: '',
+      optionValue: '',
+      optionTitle: '',
     };
   }
 
-  onChangeInput(value, id) {
+  handleChange(value, id) {
     this.setState({ [id]: value });
   }
 
   render() {
-    const { moduleName, moduleId, browserTitle } = this.state;
+    const {
+      moduleName,
+      moduleId,
+      browserTitle,
+      layoutIdx,
+      skin,
+      onlyUseTheme,
+      optionName,
+      optionValue,
+      optionTitle,
+    } = this.state;
     return (
       <form>
         <div className="form-group">
           <label htmlFor="moduleName">모듈명</label>
           <Input
-            onChange={this.onChangeInput}
+            onChange={this.handleChange}
             value={moduleName}
             id="moduleName"
             placeholder="모듈명을 입력하세요."
@@ -36,7 +62,7 @@ class ModuleFormContainer extends React.Component {
         <div className="form-group">
           <label htmlFor="moduleId">모듈ID</label>
           <Input
-            onChange={this.onChangeInput}
+            onChange={this.handleChange}
             value={moduleId}
             id="moduleId"
             placeholder="모듈ID를 입력하세요."
@@ -45,7 +71,7 @@ class ModuleFormContainer extends React.Component {
         <div className="form-group">
           <label htmlFor="browserTitle">브라우저 타이틀</label>
           <Input
-            onChange={this.onChangeInput}
+            onChange={this.handleChange}
             value={browserTitle}
             id="browserTitle"
             placeholder="모듈ID를 입력하세요."
@@ -53,21 +79,26 @@ class ModuleFormContainer extends React.Component {
         </div>
         <div className="form-group">
           <label htmlFor="layoutIdx">레이아웃 선택</label>
-          <select className="form-control" id="layoutIdx">
-            <option>선택</option>
-          </select>
+          <SelectBox id="layoutIdx" onChange={this.handleChange} value={layoutIdx}>
+            <option value="1">선택</option>
+            <option value="2">선택2</option>
+          </SelectBox>
         </div>
         <div className="form-group">
           <label htmlFor="skin">스킨 선택</label>
-          <select className="form-control" id="skin">
-            <option>선택</option>
-          </select>
+          <SelectBox id="skin" onChange={this.handleChange} value={skin}>
+            <option value="1">선택</option>
+          </SelectBox>
         </div>
         <div className="form-group form-check">
-          <input type="checkbox" className="form-check-input" id="onlyUseTheme" />
-          <label className="form-check-label" htmlFor="onlyUseTheme">
+          <CheckBox
+            id="onlyUseTheme"
+            onChange={this.handleChange}
+            value="Y"
+            checked={onlyUseTheme === 'Y'}
+          >
             테마 사용여부
-          </label>
+          </CheckBox>
         </div>
 
         <h4 className="mt-5">
@@ -78,19 +109,17 @@ class ModuleFormContainer extends React.Component {
           <li className="list-group-item">
             <div className="row">
               <div className="col-2">
-                <button type="button" className="btn btn-secondary btn-sm">
-                  <i className="fas fa-plus" />
-                </button>
+                <AddButton onlyUseIcon btnSize="sm" />
                 &nbsp;
                 <strong>기능</strong>
               </div>
-              <div className="col-2">
+              <div className="col-3">
                 <strong>이름</strong>
               </div>
-              <div className="col-2">
+              <div className="col-3">
                 <strong>값</strong>
               </div>
-              <div className="col-6">
+              <div className="col-4">
                 <strong>타이틀</strong>
               </div>
             </div>
@@ -100,32 +129,35 @@ class ModuleFormContainer extends React.Component {
             <div className="row">
               <div className="col-2">
                 <div className="btn-group btn-group-sm" role="group">
-                  <button type="button" className="btn btn-secondary">
-                    <i className="fas fa-cog" />
-                  </button>
-                  <button type="button" className="btn btn-danger">
-                    <i className="fas fa-times" />
-                  </button>
+                  <SettingButton onlyUseIcon />
+                  <RemoveButton onlyUseIcon />
                 </div>
               </div>
-              <div className="col-2">
-                <input type="text" className="form-control form-control-sm" id="browserTitle" />
+              <div className="col-3">
+                <Input size="sm" onChange={this.handleChange} value={optionName} id="optionName" />
               </div>
-              <div className="col-6">
-                <input type="text" className="form-control form-control-sm" id="browserTitle" />
+              <div className="col-3">
+                <Input
+                  size="sm"
+                  onChange={this.handleChange}
+                  value={optionValue}
+                  id="optionValue"
+                />
               </div>
-              <div className="col-2">
-                <input type="text" className="form-control form-control-sm" id="browserTitle" />
+              <div className="col-4">
+                <Input
+                  size="sm"
+                  onChange={this.handleChange}
+                  value={optionTitle}
+                  id="optionTitle"
+                />
               </div>
             </div>
           </li>
         </ul>
 
         <div className="mt-3 text-right">
-          <button type="button" className="btn btn-success">
-            <i className="fas fa-check" />
-            &nbsp;저장
-          </button>
+          <SaveButton />
         </div>
       </form>
     );

@@ -4,7 +4,7 @@ import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import '@fortawesome/fontawesome-free/css/all.css';
 
-import InputSearchContainer from './containers/InputSearchContainer';
+import InputSearchContainer from './InputSearchContainer';
 import Menu from './Menu';
 
 ReactDOM.render(

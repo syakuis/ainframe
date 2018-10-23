@@ -48,6 +48,7 @@
     "lerna": "^3.4.3",
     "mini-css-extract-plugin": "^0.4.3",
     "prettier": "^1.14.3",
+    "react-test-renderer": "^16.5.2",
     "style-loader": "^0.23.1",
     "stylelint": "^9.6.0",
     "stylelint-config-standard": "^18.2.0",

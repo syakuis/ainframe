@@ -1,5 +1,5 @@
 import React from 'react';
-import InputSearch from '_components/InputSearch';
+import InputSearch from '../InputSearch';
 
 const propTypes = {};
 

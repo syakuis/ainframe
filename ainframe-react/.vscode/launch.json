@@ -3,14 +3,15 @@
   "configurations": [
 
       {
-          "name": "ainframe-react",
+          "name": "ainframe-react-module",
           "type": "chrome",
           "request": "launch",
           "url": "http://localhost:8080/",
           "sourceMaps": true,
-          "webRoot": "${workspaceRoot}",
+          "webRoot": "${workspaceRoot}/packages/ainframe-react-module",
           "sourceMapPathOverrides": {
-            //   "webpack:///./~/*": "${workspaceRoot}/node_modules/*", 
+              "webpack:///./~/*": "${workspaceRoot}/node_modules/*", 
+              "webpack:///./~/*": "${webRoot}/node_modules/*", 
               "webpack:///*": "${webRoot}/*",
           },
         //   "preLaunchTask": "build",

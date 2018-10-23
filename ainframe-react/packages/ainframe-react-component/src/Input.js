@@ -6,13 +6,15 @@ const propTypes = {
   id: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  size: PropTypes.string,
 };
 const defaultProps = {
   className: 'form-control',
   value: '',
+  size: '',
 };
 
-class Select extends React.Component {
+class Input extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,21 +23,20 @@ class Select extends React.Component {
 
   onChange(e) {
     const { onChange } = this.props;
-    onChange(e.target.value, e.target.id, e);
+    const { target } = e;
+    const { value, id } = target;
+    onChange(value, id, target);
   }
 
   render() {
-    const { id, value, className, ...props } = this.props;
+    const { id, value, size, className, ...props } = this.props;
     return (
-      <select className="form-control" id="skin">
-        <option>선택</option>
-      </select>
       <input
         type="text"
         {...props}
         id={id}
         aria-describedby={`${id}Help`}
-        className={className}
+        className={`${className}${size ? ` form-control-${size}` : ''}`}
         value={value}
         onChange={this.onChange}
       />
@@ -43,7 +44,7 @@ class Select extends React.Component {
   }
 }
 
-Select.propTypes = propTypes;
-Select.defaultProps = defaultProps;
+Input.propTypes = propTypes;
+Input.defaultProps = defaultProps;
 
-export default Select;
+export default Input;

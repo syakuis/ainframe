@@ -6,13 +6,16 @@ const propTypes = {
   id: PropTypes.string.isRequired,
   value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  useEmptyOption: PropTypes.bool,
 };
 const defaultProps = {
   className: 'form-control',
   value: '',
+  useEmptyOption: true,
 };
 
-class Input extends React.Component {
+class SelectBox extends React.Component {
   constructor(props) {
     super(props);
 
@@ -21,26 +24,30 @@ class Input extends React.Component {
 
   onChange(e) {
     const { onChange } = this.props;
-    onChange(e.target.value, e.target.id, e);
+    const { target } = e;
+    const { value, id } = target;
+    onChange(value, id, target);
   }
 
   render() {
-    const { id, value, className, ...props } = this.props;
+    const { id, value, className, children, useEmptyOption, ...props } = this.props;
     return (
-      <input
-        type="text"
+      <select
         {...props}
         id={id}
         aria-describedby={`${id}Help`}
         className={className}
         value={value}
         onChange={this.onChange}
-      />
+      >
+        {useEmptyOption ? <option>선택</option> : null}
+        {children}
+      </select>
     );
   }
 }
 
-Input.propTypes = propTypes;
-Input.defaultProps = defaultProps;
+SelectBox.propTypes = propTypes;
+SelectBox.defaultProps = defaultProps;
 
-export default Input;
+export default SelectBox;
